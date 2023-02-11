@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.dropdown-toggle::after {
+  display: none !important; 
+}
+#offcanvasNavbarDropdown-expand-md{
+  padding: 0px;
+  margin-left: 10px;
+}
