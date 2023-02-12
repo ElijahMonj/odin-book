@@ -125,6 +125,9 @@ function NavigationBar() {
                                 <NavDropdown.Item href="#action4">
                                   Settings
                                 </NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to={'/about'}>
+                                  About
+                                </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item as={Link} to={'/'} onClick={logOut}>
                                 Log-Out
