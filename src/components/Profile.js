@@ -41,6 +41,11 @@ function Profile(){
         }else if(user===1){
             console.log("Redirect")
         }else{
+            function posts(){
+                return (
+                    <div>test</div>
+                )
+            }
             return(
                 
                 <section className="h-100 gradient-custom-2">
@@ -50,28 +55,28 @@ function Profile(){
                         <div className="card">
                         <div className="rounded-top text-white d-flex flex-row" style={{backgroundColor: "#000", height:200}}>
                             <div className="ms-4 mt-5 d-flex flex-column" style={{width: 150}}>
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                            <img src={user.currentUser.defaultProfile}
                                 alt="" className="img-fluid img-thumbnail mt-4 mb-2"
-                                style={{width: 150, zIndex: 1}}/>
+                                style={{width: 150, minHeight: 150,objectFit:"cover",zIndex: 1}}/>
                             
                             </div>
                             <div className="ms-3" style={{marginTop: 130}}>
-                            <h5>Andy Horwitz</h5>
-                            <p>@New York</p>
+                            <h5>{user.currentUser.firstName+" "+user.currentUser.lastName}</h5>
+                            <p>{user.currentUser.email}</p>
                             </div>
                         </div>
                         <div className="p-4 text-black" style={{backgroundColor: "#f8f9fa"}}>
                             <div className="d-flex justify-content-end text-center py-1">
                             <div>
-                                <p className="mb-1 h5">253</p>
-                                <p className="small text-muted mb-0">Photos</p>
+                                <p className="mb-1 h5">{user.currentUser.posts.length}</p>
+                                <p className="small text-muted mb-0">Posts</p>
                             </div>
                             <div className="px-3">
-                                <p className="mb-1 h5">1026</p>
+                                <p className="mb-1 h5">{user.currentUser.followers.length}</p>
                                 <p className="small text-muted mb-0">Followers</p>
                             </div>
                             <div>
-                                <p className="mb-1 h5">478</p>
+                                <p className="mb-1 h5">{user.currentUser.following.length}</p>
                                 <p className="small text-muted mb-0">Following</p>
                             </div>
                             </div>
@@ -84,7 +89,7 @@ function Profile(){
                             </div>
                             
                             <div className="p-4" style={{backgroundColor: "#f8f9fa"}}>
-                                <p className="font-italic mb-1">Add bio</p>
+                                <p className="font-italic mb-1">{user.currentUser.bio}</p>
                             </div>
                             </div>
                             <div className="d-flex justify-content-between align-items-center mb-4">
@@ -109,12 +114,6 @@ function Profile(){
                                 </p>
                                 </div>
                             </div>
-
-                        
-
-
-
-
 
                             
                         </div>

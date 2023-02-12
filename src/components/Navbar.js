@@ -52,7 +52,7 @@ function NavigationBar() {
     }
     function logOut(){
         window.localStorage.setItem("token", 0);
-        
+        navigate(`/`);
         window.location.reload(true)    
     }
     function search(){
@@ -112,10 +112,10 @@ function NavigationBar() {
                               align="end"
                               title={
                                   <div className="pull-left">
-                                      <img className="thumbnail-image" 
-                                          src={defProfile} 
+                                      <img className="thumbnail-image rounded-circle" 
+                                          src={user.currentUser.defaultProfile} 
                                           alt="user pic"
-                                          style={{height:40}}
+                                          style={{height:40,objectFit:"cover"}}
                                       />
                                   </div>
                               } 
