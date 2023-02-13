@@ -13,6 +13,7 @@ function Home(){
         const fetchData = async ()=>{
         
             let token=window.localStorage.getItem("token");
+            
             try {
                const result = await axios({
                    method:'GET',
@@ -54,9 +55,19 @@ function Home(){
             })
             
             if(login_result.data.message!==undefined){
-                console.log(login_result.data.message)
+                
+                if(login_result.data.message=="Email does not exist."){
+                    document.getElementById('formEmail').style.color='red'
+                    document.getElementById('emailName').innerHTML="Email does not exist."
+                }else if(login_result.data.message=="Wrong password."){
+                    document.getElementById('formPassword').style.color='red'
+                    document.getElementById('passwordName').innerHTML="Wrong password."
+                }
             }
             window.localStorage.setItem("token", login_result.data.token);
+
+
+            
             const fetchData = async ()=>{
         
                 let token=window.localStorage.getItem("token");
@@ -94,6 +105,14 @@ function Home(){
         window.localStorage.setItem("token", null);
         setUser(1)
     }
+    function handleChangeEmail(event){
+        document.getElementById('formEmail').style.color='black'
+        document.getElementById('emailName').innerHTML="Email address"
+    } 
+    function handleChangePassword(event){
+        document.getElementById('formPassword').style.color='black'
+        document.getElementById('passwordName').innerHTML="Password"
+    } 
     
     function homepage(){
         if((window.localStorage.getItem("token"))===0||user===1){
@@ -118,15 +137,15 @@ function Home(){
                                     <form onSubmit={loginUser} >
                                     <p>Please login to your account</p>
 
-                                    <div className="form-outline mb-4 form-floating">
-                                        <input type="email" id="email" className="form-control" name="email"
+                                    <div className="form-outline mb-4 form-floating" id="formEmail">
+                                        <input type="email" id="email" className="form-control" name="email" onChange={handleChangeEmail}
                                         placeholder="Phone number or email address" />
-                                        <label className="form-label" htmlhtmlFor="email">Email address</label>
+                                        <label className="form-label" htmlFor="email" id="emailName" >Email address</label>
                                     </div>
 
-                                    <div className="form-outline mb-4 form-floating">
-                                        <input type="password" id="password" className="form-control" name="password" placeholder="Password" />
-                                        <label className="form-label" htmlhtmlFor="password">Password</label>
+                                    <div className="form-outline mb-4 form-floating" id="formPassword">
+                                        <input type="password" id="password" onChange={handleChangePassword} className="form-control" name="password" placeholder="Password" />
+                                        <label className="form-label" htmlFor="password" id="passwordName">Password</label>
                                     </div>
 
                                     <div className="text-center pt-1 mb-5 pb-1 d-grid">
