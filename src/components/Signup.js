@@ -1,23 +1,38 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import {Link, NavLink} from 'react-router-dom'
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 function Signup(){
-    
-    function submit(e){
+    const navigate = useNavigate();
+    const URL="http://localhost:3002/users/"
+    async function submit(e){
         e.preventDefault();
         if(document.getElementById('password').value!==document.getElementById('confirmPassword').value){
             document.getElementById('warning').style.display="inline"
         }else{
             document.getElementById('warning').style.display="none"
-            const data={
-                firstName:document.getElementById('firstName').value,
-                lastName:document.getElementById('lastName').value,
-                email:document.getElementById('email').value,
-                password:document.getElementById('password').value,
-                birthDay:document.getElementById('birthday').value,
-            }
             
+            try {
+                const registerResult=await axios({
+                    method:'POST',
+                    url:URL+'register',
+                    data:{
+                        firstName:document.getElementById('firstName').value,
+                        lastName:document.getElementById('lastName').value,
+                        email:document.getElementById('email').value,
+                        password:document.getElementById('password').value,
+                        birthDay:document.getElementById('birthday').value,
+                    }
+                })
+                console.log(registerResult) 
+                if(registerResult.status===201){
+                    navigate(`/`);
+                }              
+                
+            } catch (error) {
+                
+            }
         }
         
         
