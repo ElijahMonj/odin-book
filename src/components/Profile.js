@@ -53,16 +53,18 @@ function Profile(){
                     <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col col-lg-9 col-xl-7">
                         <div className="card">
-                        <div className="rounded-top text-white d-flex flex-row" style={{backgroundColor: "#000", height:200}}>
-                            <div className="ms-4 mt-5 d-flex flex-column" style={{width: 150}}>
+                        <div className="rounded-top text-white row p-0 m-0" style={{backgroundColor: "#000"}}>
+                            <div className="ms-4 d-flex col-sm-4" style={{width: 150}}>
                             <img src={user.currentUser.defaultProfile}
                                 alt="" className="img-fluid img-thumbnail mt-4 mb-2"
-                                style={{width: 150, minHeight: 150,objectFit:"cover",zIndex: 1}}/>
+                                style={{maxWidth: 150, maxHeight: 150,minHeight: 150, minWidth: 150,objectFit:"cover",zIndex: 1}}/>
                             
                             </div>
-                            <div className="ms-3" style={{marginTop: 130}}>
-                            <h5>{user.currentUser.firstName+" "+user.currentUser.lastName}</h5>
-                            <p>{user.currentUser.email}</p>
+                            <div className="ms-3 col-sm-8 d-flex align-items-end">
+                                <div>
+                                    <h5>{user.currentUser.firstName+" "+user.currentUser.lastName}</h5>
+                                    <p>{user.currentUser.email}</p>
+                                </div>       
                             </div>
                         </div>
                         <div className="p-4 text-black" style={{backgroundColor: "#f8f9fa"}}>
@@ -100,7 +102,7 @@ function Profile(){
 
 
                            <div className="card mb-4">
-                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" className="card-img-top"
+                                <img src="https://images5.alphacoders.com/112/1123013.jpg" className="card-img-top"
                                 alt="Hollywood Sign on The Hill" />
                                 <div className="card-body">
                                 <h5 className="card-title">Card title</h5>
