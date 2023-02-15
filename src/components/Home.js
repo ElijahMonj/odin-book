@@ -87,6 +87,7 @@ function Home(){
                    
                 } catch (error) {
                     console.log(error)
+                
                     setUser(1)
                 }
                 
@@ -97,7 +98,7 @@ function Home(){
             //setUser(login_result.data)
             
         } catch (error) {
-            
+            alert("Connection Refused.")
         }
        
     }
