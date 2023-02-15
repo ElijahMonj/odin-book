@@ -256,7 +256,7 @@ function Home(){
         }
     }
     return(
-        <div className="container-fluid" id="home">
+        <div className="container-fluid" >
         
            {homepage()}    
         </div>
