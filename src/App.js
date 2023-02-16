@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import About from './components/About'
 import Profile from './components/Profile'
+import Myprofile from './components/Myprofile'
 import Chat from './components/Chat'
 import Post from './components/Post'
 import Search from './components/Search'
@@ -21,6 +22,7 @@ function App() {
         <Route exact path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/profile' element={<Profile/>}/>
+        <Route path='/myprofile' element={<Myprofile/>}/>
         <Route path='/chat' element={<Chat/>}/>
         <Route path='/post' element={<Post/>}/>
         <Route path='/search' element={<Search/>}/>
