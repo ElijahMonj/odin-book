@@ -17,7 +17,7 @@ import {Link, NavLink} from 'react-router-dom'
 function App() {
   return (
     <BrowserRouter>
-      <div className="App container-fluid" style={{padding:0}}>
+      <div className="App container-fluid h-100" style={{padding:0}}>
       <Routes>
         <Route exact path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>

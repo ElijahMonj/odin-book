@@ -11,7 +11,7 @@ function Home(){
     const [user, setUser]=useState(0)
     useEffect(()=>{
         const fetchData = async ()=>{
-        
+            
             let token=window.localStorage.getItem("token");
             
             try {
@@ -102,10 +102,45 @@ function Home(){
         }
        
     }
-    function logOut(){
-        window.localStorage.setItem("token", null);
-        setUser(1)
+    function getPosts(){
+        console.log("---getPost()---")
+       
+        let posts;
+        
+        let followingUsers=[];
+        user.currentUser.following.forEach(function(uid) {
+            let sortUsers = user.users.filter(function(followedUser){
+               return followedUser._id==uid
+            })
+           
+            followingUsers.push(sortUsers)
+            
+        });
+
+        
+        let object=[];
+        followingUsers.forEach(function(u){
+            
+            u[0].posts.forEach(function(post){
+                
+                
+                object.push(
+                    {
+                        profilePic: u[0].defaultProfile,
+                        author:post.author,
+                        date:post.date,
+                        caption:post.caption,
+                        comments:post.comments,
+                        likes:post.likes,
+                        picture:post.picture
+                    }
+                ) 
+            })
+        })
+        console.log(object)
+        return object;
     }
+    
     function handleChangeEmail(event){
         document.getElementById('formEmail').style.color='black'
         document.getElementById('emailName').innerHTML="Email address"
@@ -114,6 +149,38 @@ function Home(){
         document.getElementById('formPassword').style.color='black'
         document.getElementById('passwordName').innerHTML="Password"
     } 
+    async function newPost(){
+        let token=window.localStorage.getItem("token");
+        const d = new Date();
+        const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        let date=month[d.getMonth()]+" "+d.getDate()+" "+d.getFullYear()
+        let time=d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+
+        const postDate=date+", "+time
+        console.log(postDate)
+       
+        try {
+            const res = await axios({
+                method:'PATCH',
+                url:URL+user.currentUser._id+"/newPost/",
+                headers:{
+                    Authorization:'Bearer '+token 
+                },
+                data:{
+                    author:user.currentUser.firstName+" "+user.currentUser.lastName,
+                    date:postDate,
+                    caption:document.getElementById('textAreaExample').value,
+                    comments:[],
+                    likes:[],         
+                }
+            }) 
+
+         console.log(res)
+
+         } catch (error) {
+             console.log(error)
+         }
+    }
     
     function homepage(){
         if((window.localStorage.getItem("token"))===0||user===1){
@@ -186,6 +253,7 @@ function Home(){
                 <div>LOADING....</div>
             )
         }else if((window.localStorage.getItem("token"))!==0){
+            
             return(
                 <div className="container-fluid" style={{padding:0}}>
                     <NavigationBar></NavigationBar>
@@ -208,8 +276,8 @@ function Home(){
                                         </div>
                                         <div className="d-flex justify-content-between">
                                         <button type="button" className="btn btn-success">Add Image</button>
-                                        <button type="button" className="btn btn-danger">
-                                            Send <i className="fas fa-long-arrow-alt-right ms-1"></i>
+                                        <button type="button" className="btn btn-danger" onClick={newPost}>
+                                            Post <i className="fas fa-long-arrow-alt-right ms-1"></i>
                                         </button>
                                         </div>
                                     </div>
@@ -223,16 +291,30 @@ function Home(){
 
 
                     <div className="bg-secondary container-lg ">
-                        <div className="card col-md-6 m-auto">
+                    
+                    
+                    {getPosts().map(function(p, idx){
+
+                        function withImage(){
+                            if(p.picture=="none"){
+                                
+                            }else{
+                                return(
+                                <img src={p.picture}/>
+                                )
+                            }
+                            
+                        }
+                        return (
+                            <div className="card col-md-6 m-auto mb-5" key={idx}>
                             <div className="card-body">
                             <h4><img className="me-2" style={{height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
                             src="https://img.freepik.com/free-vector/cute-cat-playing-box-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-flat_138676-5000.jpg?w=740&t=st=1676189306~exp=1676189906~hmac=9489d110d5e9ace5391451d014e68c477cb02ac188e695e6cdc8023021ee0d36">
-                            </img> Elijah Monjardin</h4>     
-                                <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                            </img>{p.author}</h4>     
+                                <p className="card-text">{p.caption}</p>
+                                <p className="card-text"><small className="text-muted">{p.date}</small></p>
                             </div>
-                            <img src="https://img.freepik.com/free-photo/breathtaking-view-beautiful-landscape-surrounded-by-mountains-wanaka-town-new-zealand_181624-41030.jpg?w=1380&t=st=1676189457~exp=1676190057~hmac=0d649dec0819736da3d3b9bd5e4869d77580d9c94db452c4223f67e665627595" className="card-img-bottom" alt="..."/>
-                            
+                            {withImage()}
                             <div className="btn-group mt-1" role="group" aria-label="Basic example">
                             <button type="button" className="btn btn-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-chat mb-1 me-2" viewBox="0 0 16 16">
@@ -249,6 +331,11 @@ function Home(){
                             </svg>Share</button>
                             </div>
                         </div>
+            
+                        )
+                    })}
+                    
+                        
                     </div>
                     
 

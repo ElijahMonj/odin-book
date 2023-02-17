@@ -47,12 +47,14 @@ function Myprofile(){
         }else if(user===1){
             console.log("Redirect")
         }else{
-
+            function showMyPosts(){
+                
+            }
                 return(
                 
                     <section className="h-100 gradient-custom-2">
                     <div className="container h-100">
-                        <div className="row d-flex justify-content-center align-items-center h-100">
+                        <div className="row d-flex justify-content-center align-items-center">
                         <div className="col col-lg-9 col-xl-7">
                             <div className="card">
                             <div className="rounded-top text-white row p-0 m-0" style={{backgroundColor: "#000"}}>
@@ -107,21 +109,49 @@ function Myprofile(){
     
     
     
-                               <div className="card mb-4">
-                                    <img src="https://images5.alphacoders.com/112/1123013.jpg" className="card-img-top"
-                                    alt="Hollywood Sign on The Hill" />
-                                    <div className="card-body">
-                                    <h5 className="card-title">Card title</h5>
-                                    <p className="card-text">
-                                        This is a wider card with supporting text below as a natural lead-in to
-                                        additional content. This content is a little bit longer.
-                                    </p>
-                                    <p className="card-text d-flex justify-content-between">
-                                        <small className="text-muted align-self-center">Last updated 3 mins ago</small>
-                                        <button type="button" className="btn btn-primary btn-sm">View Post</button>
-                                    </p>
+                                {user.currentUser.posts.map(function(p, idx){
+                                    function withImage(){
+                                        
+                                        if(p.picture=="none"){
+                                            
+                                        }else{
+                                            return(
+                                            <img src={p.picture}/>
+                                            )
+                                        }
+                                        
+                                    }
+                                    return (
+                                    <div className="card m-auto mb-5" key={idx}>
+                                        <div className="card-body">
+                                        <h4><img className="me-2" style={{height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
+                                        src={user.currentUser.defaultProfile}>
+                                        </img>{p.author}</h4>     
+                                            <p className="card-text">{p.caption}</p>
+                                            <p className="card-text"><small className="text-muted">{p.date}</small></p>
+                                        </div>
+                                        {withImage()}
+                                       
+                                        <div className="btn-group mt-1" role="group" aria-label="Basic example">
+                                        <button type="button" className="btn btn-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-chat mb-1 me-2" viewBox="0 0 16 16">
+                                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                        </svg>
+                                        Like</button>
+                                        <button type="button" className="btn btn-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-chat mb-1 me-2" viewBox="0 0 16 16">
+                                            <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"></path>
+                                            </svg>Comment</button>
+                                        <button type="button" className="btn btn-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-chat mb-1 me-2" viewBox="0 0 16 16">
+                                        <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                                        </svg>Share</button>
+                                        </div>
                                     </div>
-                                </div>
+                        
+                                    )
+                                })}
+                                
     
                                 
                             </div>
