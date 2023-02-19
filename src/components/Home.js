@@ -148,6 +148,35 @@ function Home(){
         document.getElementById('formPassword').style.color='black'
         document.getElementById('passwordName').innerHTML="Password"
     } 
+    async function refresh(){
+        let token=window.localStorage.getItem("token");
+        const fetchData = async ()=>{
+        
+            
+            try {
+               const result = await axios({
+                   method:'GET',
+                   url:URL,
+                   headers:{
+                       Authorization:'Bearer '+token 
+                   }
+               }) 
+
+            console.log(result.data)
+               
+            setUser(result.data)
+           
+               
+            } catch (error) {
+                console.log(error)
+                setUser(1)
+            }
+            
+        }
+        
+        console.log("Fetching data...")
+        fetchData();
+    }
     async function newPost(){
         let token=window.localStorage.getItem("token");
         
@@ -167,7 +196,7 @@ function Home(){
                     Authorization:'Bearer '+token
                 },
                 data:{
-                    author:user.currentUser.firstName+" "+user.currentUser.lastName,
+                    author:user.currentUser._id,
                     date:postDate,
                     caption:document.getElementById('textAreaExample').value,
                     comments:[],
@@ -335,6 +364,38 @@ function Home(){
                     
                     
                     {getPosts().map(function(p, idx){
+                        async function newComment(e){
+                            e.preventDefault()
+                        
+                            let token=window.localStorage.getItem("token");
+                            
+                            const d = new Date();
+                            const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                            let date=month[d.getMonth()]+" "+d.getDate()+" "+d.getFullYear()
+                            let time=d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+
+                            const postDate=date+", "+time
+                            
+                            try {
+                                const res = await axios({
+                                    method:'PATCH',
+                                    url:URL+p.author+"/posts/"+p.id+"/newComment",
+                                    headers:{
+                                        Authorization:'Bearer '+token
+                                    },
+                                    data:{
+                                        author_id:user.currentUser._id,
+                                        date:postDate,
+                                        content:document.getElementById('writeComment').value    
+                                    }
+                                }) 
+                                refresh()
+                            } catch (error) {
+                                console.log(error)
+                            }
+                            
+                            
+                        }
                         let modalID;
                         function withImage(){
                             if(p.picture=="none"){
@@ -346,12 +407,16 @@ function Home(){
                             }
                             
                         }
+                        function findName(){
+                                        var uu = user.users.find(item => item._id === p.author);
+                                        return uu.firstName+" "+uu.lastName
+                                    }
                         return (
                             <div className="card col-lg-6 m-auto mb-5" key={idx}>
                             <div className="card-body">
                             <h4><img className="me-2" style={{height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
                             src={p.profilePic}>
-                            </img>{p.author}</h4>     
+                            </img>{findName()}</h4>     
                                 <p className="card-text">{p.caption}</p>
                                 <p className="card-text"><small className="text-muted">{p.date}</small></p>
                             </div>
@@ -372,11 +437,11 @@ function Home(){
                                     <div className="modal-content">
                                     <div className="modal-header">
                                         <div className="modal-title fs-5 d-flex" id="exampleModalLabel">
-                                        <img className="me-2" style={{height:50, width:50, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
+                                        <img className="me-2" style={{height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
                                         src={p.profilePic}></img>
                                         <div className="d-flex flex-column justify-content-center">
                                             <div>
-                                            {p.author}
+                                            {findName()}
                                             </div>
                                             <small className="text-muted" style={{fontSize:15}}>
                                             {p.date}
@@ -464,8 +529,23 @@ function Home(){
                                     </div>
                                        
                                     </div>
-                                    <div className="modal-footer ">
-                                   input comment
+                                    <div className="modal-footer pb-0">
+                                        <div className="w-100 m-0 d-flex justify-content-center">
+                                        <img className="" style={{height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
+                                            src={user.currentUser.defaultProfile}></img>
+                                            <form class="input-group ms-2" onSubmit={newComment}>
+                                            <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Write a public comment..."
+                                             aria-label="Write a public comment..." aria-describedby="button-addon2" id="writeComment"/>
+                                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+                                            </svg>
+                                            </button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                   
                                     </div>
                                     </div>
                                 </div>
