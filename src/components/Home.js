@@ -389,6 +389,7 @@ function Home(){
                                         content:document.getElementById('writeComment').value    
                                     }
                                 }) 
+                                document.getElementById('writeComment').value=""
                                 refresh()
                             } catch (error) {
                                 console.log(error)

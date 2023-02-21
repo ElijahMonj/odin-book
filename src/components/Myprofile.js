@@ -40,6 +40,57 @@ function Myprofile(){
         fetchData();
         
     },[]);
+    async function refresh(){
+        let token=window.localStorage.getItem("token");
+        const fetchData = async ()=>{
+        
+            
+            try {
+               const result = await axios({
+                   method:'GET',
+                   url:URL,
+                   headers:{
+                       Authorization:'Bearer '+token 
+                   }
+               }) 
+
+            console.log(result.data)
+               
+            setUser(result.data)
+           
+               
+            } catch (error) {
+                console.log(error)
+                setUser(1)
+            }
+            
+        }
+        
+        console.log("Fetching data...")
+        fetchData();
+    }
+    async function editBio(){
+        let token=window.localStorage.getItem("token");
+        try {
+            const res = await axios({
+                method:'PATCH',
+                url:URL+user.currentUser._id+"/bio",
+                headers:{
+                    Authorization:'Bearer '+token 
+                },
+                data:{
+                    bio:document.getElementById('newBio').value
+                }
+            }) 
+
+        console.log(res)
+        document.getElementById('newBio').value=""
+        refresh()
+         } catch (error) {
+             console.log(error)
+         }
+
+    }
     
     function isAuthenticated(){
         if(user===0){
@@ -95,7 +146,28 @@ function Myprofile(){
                                 <div className="mb-5">
                                 <div className="d-flex justify-content-between align-items-center">
                                 <p className="lead fw-normal mb-1">About</p>
-                                <p className="mb-0"><a href="#!" className="text-muted">Edit</a></p>
+                                <p className="mb-0"><a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                 className="text-muted">Edit</a></p>
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit your bio.</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <div className="form-outline">
+                                            <textarea className="form-control" id="newBio" rows="4" style={{resize: "none"}}>{user.currentUser.bio}</textarea>
+
+                                            </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-primary" onClick={editBio} data-bs-dismiss="modal">Save</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 <div className="p-4" style={{backgroundColor: "#f8f9fa"}}>

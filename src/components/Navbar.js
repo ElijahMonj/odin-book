@@ -95,19 +95,23 @@ function NavigationBar() {
                           
                           <Offcanvas.Body>
                           <Form className="d-flex" onSubmit={search}>
+                            <div className="input-group">
                               <Form.Control
                                 type="search"
                                 placeholder="Search user"
-                                className="me-2"
+                                className=""
                                 aria-label="Search"
                                 id="searchparams"
                               />
+
                               <Button variant="outline-success" type="submit"><img className="thumbnail-image"  
                                           src={searchIcon} 
                                           alt="user pic"
                                           style={{height:25}}
                                       /></Button>
+                              </div>
                             </Form>
+                            
                             <Nav className="justify-content-end flex-grow-1 pe-3 ">
                               <Nav.Link href="#action1">Chats</Nav.Link>
                               <Nav.Link href="#action2">Notifications</Nav.Link>
