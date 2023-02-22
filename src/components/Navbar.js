@@ -71,7 +71,7 @@ function NavigationBar() {
             return (  
                 <>
                   {['md'].map((expand) => (
-                    <Navbar key={expand} bg="light" expand={expand} className="mb-3">
+                    <Navbar key={expand} bg="dark" expand={expand} className="">
                     
                       <Container fluid>
                         <Navbar.Brand ><Link to="/"><img
@@ -179,7 +179,7 @@ function NavigationBar() {
                                       <img className="thumbnail-image rounded-circle" 
                                           src={user.currentUser.defaultProfile} 
                                           alt="user pic"
-                                          style={{height:40,objectFit:"cover"}}
+                                          style={{height:40,width:40,objectFit:"cover"}}
                                       />
                                   </div>
                               } 

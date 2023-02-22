@@ -76,6 +76,13 @@ function Home(){
         }
        
     }
+    function checkPost(){
+        if(getPosts().length==0){
+            return(
+                <h1 className="display-1 text-center">No posts yet.</h1>
+            )
+        }
+    }
     function getPosts(){
         
         let followingUsers=[];
@@ -110,7 +117,7 @@ function Home(){
                 ) 
             })
         })
-
+        console.log(object)
         return object;
     }
     
@@ -195,7 +202,7 @@ function Home(){
 
       
             
-            alert('Nice, you triggered this alert message!', 'success')
+            alert('Your thought was posted!', 'success')
             setTimeout(myTimer, 3000);
 
             function myTimer() {
@@ -291,6 +298,7 @@ function Home(){
             return(
                 <div className="container-fluid" style={{padding:0}}>
                     <NavigationBar></NavigationBar>
+                    
                     <div className="bg-secondary container-lg">
                         <div className="col-lg-6 m-auto">
                         <div className="row d-flex justify-content-center">
@@ -299,8 +307,7 @@ function Home(){
                                 <div className="card-body p-4">
                                     <div className="d-flex flex-start w-100">
                                     <img className="rounded-circle shadow-1-strong me-3"
-                                        src={user.currentUser.defaultProfile} alt="avatar" width="65"
-                                        height="65" />
+                                        src={user.currentUser.defaultProfile} alt="avatar" style={{height:65,width:65,objectFit:"cover"}} />
                                     <div className="w-100">
                                         <h5>Whats in your mind, {user.currentUser.firstName}?
                                         </h5>
@@ -323,7 +330,7 @@ function Home(){
                                     
                                     </div>
                                     
-                                </div><div id="liveAlertPlaceholder" style={{position:"absolute"}}></div>
+                                </div>
                                 
                                 </div>
                                 
@@ -337,7 +344,7 @@ function Home(){
                     
 
                     <div className="bg-secondary container-lg ">
-                    
+                   
                     
                     {getPosts().map(function(p, idx){
                         async function newComment(e){
@@ -362,10 +369,10 @@ function Home(){
                                     data:{
                                         author_id:user.currentUser._id,
                                         date:postDate,
-                                        content:document.getElementById('writeComment').value    
+                                        content:document.getElementById('writeComment'+p.id).value    
                                     }
                                 }) 
-                                document.getElementById('writeComment').value=""
+                                document.getElementById('writeComment'+p.id).value=""
                                 refresh()
                             } catch (error) {
                                 console.log(error)
@@ -415,7 +422,7 @@ function Home(){
                                     <div className="modal-header">
                                         <div className="modal-title fs-5 d-flex" id="exampleModalLabel">
                                         <img className="me-2" style={{height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
-                                        src={p.profilePic}></img>
+                                        src={p.picture}></img>
                                         <div className="d-flex flex-column justify-content-center">
                                             <div>
                                             {findName()}
@@ -478,8 +485,8 @@ function Home(){
                                     return(
                                         <div className="d-flex flex-start my-2" key={idc}>
                                         <img className="rounded-circle shadow-1-strong me-3"
-                                            src={findProfilePic()} alt="avatar" width="50"
-                                            height="50" />
+                                            src={findProfilePic()} alt="avatar" 
+                                            style={{height:50,width:50,objectFit:"cover"}} />
                                         <div className="flex-grow-1 flex-shrink-1">
                                             <div>
                                             <div className="d-flex  flex-column">
@@ -513,10 +520,10 @@ function Home(){
                                             <form className="input-group ms-2" onSubmit={newComment}>
                                             <div className="input-group mb-3">
                                             <input type="text" className="form-control" placeholder="Write a public comment..."
-                                             aria-label="Write a public comment..." aria-describedby="button-addon2" id="writeComment"/>
+                                             aria-label="Write a public comment..." aria-describedby="button-addon2" id={'writeComment'+p.id}/>
                                             <button className="btn btn-outline-secondary" type="submit" id="button-addon2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-return-left" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+                                            <path fillRule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
                                             </svg>
                                             </button>
                                             </div>
@@ -538,7 +545,7 @@ function Home(){
                         )
                     })}
                     
-                        
+                    {checkPost()}
                     </div>
                     
 
@@ -547,7 +554,7 @@ function Home(){
         }
     }
     return(
-        <div className="container-fluid" >
+        <div className="container-fluid p-0" >
         
            {homepage()}    
         </div>

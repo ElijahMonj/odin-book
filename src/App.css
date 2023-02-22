@@ -18,8 +18,10 @@ body,.root,.App {
 .dropdown-toggle::after {
   display:none;
 }
-.alert {
+#liveAlertPlaceholder{
+  position: absolute;
+  bottom: 0;
+  margin: 20px;
+ 
   
-  
-
 }
