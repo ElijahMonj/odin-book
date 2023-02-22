@@ -90,8 +90,7 @@ function Signup(){
                                         <label className="form-label" htmlFor="birthday">Birthday</label>
                                     </div>
                                     <div className="text-center pt-1 pb-1 d-grid">
-                                        <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
-                                        in</button>
+                                        <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Sign-up</button>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-center pb-4">

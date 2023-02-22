@@ -148,22 +148,22 @@ function Myprofile(){
                                 <p className="lead fw-normal mb-1">About</p>
                                 <p className="mb-0"><a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                  className="text-muted">Edit</a></p>
-                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit your bio.</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div className="modal-dialog">
+                                            <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h1 className="modal-title fs-5" id="staticBackdropLabel">Edit your bio.</h1>
+                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div className="modal-body">
                                             <div className="form-outline">
-                                            <textarea className="form-control" id="newBio" rows="4" style={{resize: "none"}}>{user.currentUser.bio}</textarea>
+                                            <textarea className="form-control" id="newBio" rows="4" style={{resize: "none"}} defaultValue={user.currentUser.bio}></textarea>
 
                                             </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                <button type="button" class="btn btn-primary" onClick={editBio} data-bs-dismiss="modal">Save</button>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" className="btn btn-primary" onClick={editBio} data-bs-dismiss="modal">Save</button>
                                             </div>
                                             </div>
                                         </div>

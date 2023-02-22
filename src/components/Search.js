@@ -3,12 +3,13 @@ import { useState,useEffect } from "react";
 import {Link, NavLink,Outlet,useSearchParams} from 'react-router-dom'
 import axios from 'axios';
 import NavigationBar from './Navbar'
-
+import { useNavigate } from 'react-router-dom';
 function Search(){
     const URL="http://localhost:3002/users/"
     const [searchParams,setSearchParams]=useSearchParams()
     const showUser=searchParams.get('filter')
     const [user, setUser]=useState(0)
+    const navigate = useNavigate()
     useEffect(()=>{
         const fetchData = async ()=>{
         
@@ -39,11 +40,14 @@ function Search(){
         
     },[]);
     function isAuthenticated(){
+        
+        console.log("look here")
         if(user===0){
             console.log("Loading")
         }else if(user===1){
             console.log("Redirect")
-        }else{
+        }
+        else{
             let sortedUsers;
             console.log(showUser)
             function searchUser(){

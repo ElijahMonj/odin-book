@@ -77,7 +77,12 @@ function Profile(){
          } catch (error) {
              console.log(error)
          }
-         const fetchData = async ()=>{
+         refresh()
+
+    }
+    async function refresh(){
+        let token=window.localStorage.getItem("token");
+        const fetchData = async ()=>{
         
             
             try {
@@ -103,7 +108,6 @@ function Profile(){
         
         console.log("Fetching data...")
         fetchData();
-
     }
 
     async function unfollow(){
@@ -142,32 +146,7 @@ function Profile(){
          } catch (error) {
              console.log(error)
          }
-         const fetchData = async ()=>{
-        
-            
-            try {
-               const result = await axios({
-                   method:'GET',
-                   url:URL,
-                   headers:{
-                       Authorization:'Bearer '+token 
-                   }
-               }) 
-
-            console.log(result.data)
-               
-            setUser(result.data)
-           
-               
-            } catch (error) {
-                console.log(error)
-                setUser(1)
-            }
-            
-        }
-        
-        console.log("Fetching data...")
-        fetchData();
+         refresh()
 
     }
     function isAuthenticated(){
@@ -175,7 +154,10 @@ function Profile(){
             console.log("Loading")
         }else if(user===1){
             console.log("Redirect")
-        }else{
+        }else if(showUser===user.currentUser._id){
+            navigate('/myprofile')
+          }
+        else{
             
             if(showUser===""){
                 return(
