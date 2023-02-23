@@ -72,10 +72,10 @@ function Search(){
             searchUser()
             
             return(
-                <div className="container bg-secondary">
+                <div className="container pt-5">
                     {sortedUsers.map(function(u, idx){
                         return (
-                            <div className="card mb-3 mx-auto" key={idx} style={{maxWidth: 540}}>
+                            <div className="card mb-3 mx-auto" key={idx} style={{maxWidth: 540,backgroundColor: "#9BA4B4"}}>
                                 <div className="row g-0">
                                     <div className="col-md-4 mt-3 mb-3 text-center ps-3">
                                     <img src={u.defaultProfile} className="img-fluid img-thumbnail" alt="..."
@@ -88,7 +88,7 @@ function Search(){
                                             <h5 className="card-title">{u.firstName+" "+u.lastName}</h5>
                                             <p className="card-text">{u.email}</p>
                                             <div className="d-flex justify-content-evenly rounded-3 p-2 mb-2"
-                                            style={{backgroundColor: "#efefef"}}>
+                                            style={{backgroundColor: "#F1F6F9"}}>
                                                 
                                                     <div className="text-center">
                                                         <p className="small text-muted mb-1">Posts</p>
@@ -107,7 +107,7 @@ function Search(){
                                             </div>
                                             <div className="my-auto ms-auto d-flex justify-content-end ">
                                                 <Link to={"/profile/?user="+u._id}>
-                                                    <button className="btn btn-secondary btn-sm">View Profile</button>
+                                                    <button className="btn btn-sm" id="postButton">View Profile</button>
                                                 </Link>
                                                 </div>
                                            
