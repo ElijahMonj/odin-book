@@ -54,28 +54,28 @@ function Signup(){
                                     <h5>Sign-up for a new account.</h5>
                                     <div className="form-outline mb-4 form-floating">
                                         <input type="text" id="firstName" className="form-control" name="firstName"
-                                        placeholder="First Name" required/>
+                                        placeholder="First Name" required maxLength={20}/>
                                         <label className="form-label" htmlFor="firstName">First Name</label>
                                     </div>
                                     <div className="form-outline mb-4 form-floating">
                                         <input type="text" id="lastName" className="form-control" name="lastName"
-                                        placeholder="Last Name" required/>
+                                        placeholder="Last Name" required maxLength={20}/>
                                         <label className="form-label" htmlFor="lastName">Last Name</label>
                                     </div>
 
                                     <div className="form-outline mb-4 form-floating">
                                         <input type="email" id="email" className="form-control" name="email"
                                         placeholder="Phone number or email address" required/>
-                                        <label className="form-label" htmlFor="email">Email address</label>
+                                        <label className="form-label" htmlFor="email" maxLength={30}>Email address</label>
                                     </div>
 
                                     <div className="form-outline mb-4 form-floating">
-                                        <input type="password" required id="password" className="form-control" name="password" placeholder="Password" />
-                                        <label className="form-label" htmlFor="password">Password</label>
+                                        <input type="password" required id="password" maxLength={30} className="form-control" name="password" placeholder="Password" />
+                                        <label className="form-label" htmlFor="password" >Password</label>
                                     </div>
 
                                     <div className="form-outline mb-4 form-floating">
-                                        <input required type="password" id="confirmPassword" className="form-control" name="confirmPassword" placeholder=" Confirm Password" />
+                                        <input maxLength={30} required type="password" id="confirmPassword" className="form-control" name="confirmPassword" placeholder=" Confirm Password" />
                                         <label className="form-label" htmlFor="confirmPassword">Confirm Password</label>
 
                                         <i className="text-danger" style={{display:'none'}} id="warning">
@@ -90,25 +90,25 @@ function Signup(){
                                         <label className="form-label" htmlFor="birthday">Birthday</label>
                                     </div>
                                     <div className="text-center pt-1 pb-1 d-grid">
-                                        <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Sign-up</button>
+                                        <button className="btn btn-block fa-lg gradient-custom-2 mb-3" id="postButton" type="submit">Sign-up</button>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-center pb-4">
                                         <p className="mb-0 me-2">Already have account?</p>
-                                        <a href="/" type="button" className="btn btn-outline-danger">Log-in</a>   
+                                        <a href="/" type="button" className="btn" id="postButton">Log-in</a>   
                                     </div>
                 
                                     </form>
 
                                 </div>
                                 </div>
-                                <div className="col-lg-6 d-flex align-items-center bg-secondary text-center">
+                                <div className="col-lg-6 d-flex align-items-center text-center pb-5" style={{backgroundColor:"#14274E"}}>
                                 
                                 <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                 <div className="text-center">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                                         style={{width: 185}} alt="logo"/>
-                                    <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+                                    <h4 className="mt-1 mb-5 pb-1 text-center">We are The Lotus Team</h4>
                                     </div>
                                     <h4 className="mb-4">We are more than just a company</h4>
                                     <p className="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

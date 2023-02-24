@@ -182,7 +182,8 @@ function Home(){
                     date:postDate,
                     caption:document.getElementById('textAreaExample').value,
                     comments:[],
-                    likes:[],         
+                    likes:[],
+                    picture:document.getElementById('imageLink').innerHTML    
                 }
             }) 
 
@@ -217,7 +218,7 @@ function Home(){
         refresh()
     }
     function addImage(){
-        
+       alert(document.getElementById('imageLink').innerHTML) 
     }
     function comment(e){
        
@@ -228,7 +229,7 @@ function Home(){
            
             return(
                
-                <section className="h-100 gradient-form container-fluid" style={{backgroundColor: "#eee"}}>
+                <section className="h-100 gradient-form container-fluid" style={{backgroundColor: "#f5f5f5"}}>
                     <div className="container py-5 h-100">
                         <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-xl-10">
@@ -258,14 +259,13 @@ function Home(){
                                     </div>
 
                                     <div className="text-center pt-1 mb-5 pb-1 d-grid">
-                                        <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
-                                        in</button>
+                                        <button className="btn btn-block fa-lg gradient-custom-2 mb-3" id="postButton" type="submit">Log in</button>
                                         <a className="text-muted" href="#!">Forgot password?</a>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-center pb-4">
                                         <p className="mb-0 me-2">Don't have an account?</p>
-                                        <a href="/signup" type="button" className="btn btn-outline-danger">Create New</a>
+                                        <a href="/signup" type="button" className="btn" id="postButton">Create New</a>
                                         
                                     </div>
 
@@ -273,10 +273,10 @@ function Home(){
 
                                 </div>
                                 </div>
-                                <div className="col-lg-6 d-flex align-items-center bg-secondary">
+                                <div className="col-lg-6 d-flex align-items-center" style={{backgroundColor:"#14274E"}}>
                                 <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                                    <h4 className="mb-4">We are more than just a company</h4>
-                                    <p className="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    <h4 className="mb-4 text-center">We are more than just a company</h4>
+                                    <p className="small mb-0 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                                     exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                 </div>
@@ -303,8 +303,8 @@ function Home(){
                         <div className="col-lg-6 m-auto">
                         
 
-                            <div class="card">
-                                <div class="card-body">
+                            <div className="card">
+                                <div className="card-body">
                                     <div className="d-flex ">
                                     <img className="" style={{minHeight:40, minWidth:40,height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
                                         src={user.currentUser.defaultProfile}>
@@ -312,13 +312,36 @@ function Home(){
                                     <h5 className="w-100 ms-2 m-0 d-flex flex-column justify-content-center">Whats in your mind, {user.currentUser.firstName}?</h5> 
                                     </div>
                                     
-                                    <textarea className="form-control my-3" id="textAreaExample" rows="2" style={{resize: "none"}}></textarea>
-                                    
+                                    <textarea className="form-control my-3" id="textAreaExample" rows="2" style={{resize: "none"}} maxLength="200"></textarea>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Include an Image</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                On Beta
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn" id="postButton" onClick={addImage}>Save</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
                                     <div className="d-flex flex-row justify-content-end">
                                         
-                                        <button type="button" className="btn btn-success mx-4" onClick={addImage}>Add Image</button>
+                                        <button type="button" className="btn mx-4" id="postButton" data-bs-toggle="modal" data-bs-target="#exampleModal" >
                                         
-                                        <button type="button" className="btn btn-danger" id="liveAlertBtn" onClick={newPost}>
+                                        <div id="imageLink" style={{display:"none"}}>none</div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-image" style={{marginBottom:1.5}} viewBox="0 0 16 16">
+                                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                        </svg>
+                                        </button>
+                                        
+                                        <button type="button" className="btn" id="postButton" onClick={newPost}>
                                             Post 
                                         </button>
                                         
@@ -431,7 +454,7 @@ function Home(){
                                         
                                         <button type="button" className="btn-close mb-auto" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div className="modal-body">
+                                    <div className="modal-body text-break">
                                     {p.caption}
                                     <div className="card"style={{border:0}}>
                                     
@@ -485,13 +508,13 @@ function Home(){
                                         <div className="flex-grow-1 flex-shrink-1">
                                         <div className="forPadding">
                                             <div className="d-flex  flex-column">
-                                                <p className="m-0">
+                                                <p className="m-0 text-break">
                                                 {findName()} 
                                                 </p>
-                                                <span className="small text-muted">{comment.date} </span>
+                                                <span className="small text-muted text-break">{comment.date} </span>
                                                 
                                             </div>
-                                            <p className="mb-0">
+                                            <p className="mb-0 text-break">
                                             {comment.content} 
                                             </p>
                                             </div>
@@ -515,7 +538,7 @@ function Home(){
                                             <form className="input-group ms-2" onSubmit={newComment}>
                                             <div className="input-group mb-3">
                                             <input type="text" className="form-control" placeholder="Write a public comment..."
-                                             aria-label="Write a public comment..." aria-describedby="button-addon2" id={'writeComment'+p.id}/>
+                                             aria-label="Write a public comment..." aria-describedby="button-addon2" id={'writeComment'+p.id} maxLength="200"/>
                                             <button className="btn " type="submit" id="button-addon2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className="bi bi-arrow-return-left" viewBox="0 0 16 16">
                                             <path fillRule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>

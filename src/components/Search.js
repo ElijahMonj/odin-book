@@ -75,7 +75,7 @@ function Search(){
                 <div className="container pt-5">
                     {sortedUsers.map(function(u, idx){
                         return (
-                            <div className="card mb-3 mx-auto" key={idx} style={{maxWidth: 540,backgroundColor: "#9BA4B4"}}>
+                            <div className="card mb-3 mx-auto" key={idx} style={{maxWidth: 540 }}>
                                 <div className="row g-0">
                                     <div className="col-md-4 mt-3 mb-3 text-center ps-3">
                                     <img src={u.defaultProfile} className="img-fluid img-thumbnail" alt="..."

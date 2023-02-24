@@ -107,10 +107,10 @@ function Myprofile() {
 
                 <section className="h-100 gradient-custom-2">
                     <div className="container h-100">
-                        <div className="row d-flex justify-content-center align-items-center">
+                        <div className="row d-flex justify-content-center align-items-center pt-5">
                             <div className="col col-lg-9 col-xl-7">
                                 <div className="card">
-                                    <div className="rounded-top text-white row p-0 m-0" style={{ backgroundColor: "#000" }}>
+                                    <div className="rounded-top text-white row p-0 m-0" id="coverBackground">
                                         <div className="ms-4 d-flex col-sm-4 ps-0" style={{ width: 150 }}>
                                             <img src={user.currentUser.defaultProfile}
                                                 alt="" className="img-fluid img-thumbnail mt-4 mb-2"
@@ -278,7 +278,7 @@ function Myprofile() {
                                                                         
                                                                         <button type="button" className="btn-close mb-auto" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-                                                                    <div className="modal-body">
+                                                                    <div className="modal-body text-break">
                                                                         {p.caption}
                                                                         <div className="card" style={{ border: 0 }}>
 
@@ -331,13 +331,13 @@ function Myprofile() {
                                                                                                         <div className="flex-grow-1 flex-shrink-1">
                                                                                                             <div className="forPadding">
                                                                                                                 <div className="d-flex  flex-column">
-                                                                                                                    <p className="m-0">
+                                                                                                                    <p className="m-0 text-break ">
                                                                                                                         {findName()}
                                                                                                                     </p>
-                                                                                                                    <span className="small text-muted">{comment.date} </span>
+                                                                                                                    <span className="small text-muted text-break">{comment.date} </span>
 
                                                                                                                 </div>
-                                                                                                                <p className="mb-0">
+                                                                                                                <p className="mb-0 text-break">
                                                                                                                     {comment.content}
                                                                                                                 </p>
                                                                                                             </div>
@@ -387,7 +387,7 @@ function Myprofile() {
                                         })}
 
 
-
+                                        <div className="text-muted text-center">End of posts.</div>
                                     </div>
                                 </div>
                             </div>
@@ -401,7 +401,7 @@ function Myprofile() {
     }
 
     return (
-        <div className="container-fluid p-0">
+        <div className="container-fluid p-0 forBG" >
             <NavigationBar></NavigationBar>
             {isAuthenticated()}
 
