@@ -298,11 +298,15 @@ function Profile(){
                                                 <div className="card m-auto mb-5" key={idx}>
                                                     <div className="card-body">
                                                     <div className="d-flex">
-                                <img className="me-2" style={{minHeight:40, minWidth:40, height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
-                                src={userProfile.defaultProfile}>
-                                </img>
-                                <h4 className="m-0 d-flex flex-column justify-content-center text-break">{findName()}</h4>
-                            </div>
+                                                    <a href={"/profile/?user="+userProfile._id}>
+                                                    <img className="me-2" style={{minHeight:40, minWidth:40, height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
+                                                    src={userProfile.defaultProfile}>
+                                                    </img></a>
+                                                    <h4 className="m-0 d-flex flex-column justify-content-center text-break">
+                                                    <a href= {"/profile/?user="+p.author} className="text-dark" id="nameLink">
+                                                                {findName()}
+                                                    </a></h4>
+                                                 </div>
                                                         <p className="card-text">{p.caption}</p>
                                                         <p className="card-text"><small className="text-muted">{p.date}</small></p>
                                                     </div>
@@ -324,11 +328,14 @@ function Profile(){
                                                                    
                                                                     <div className="modal-header">
                                                                         <div className="modal-title fs-5 d-flex" id="exampleModalLabel">
+                                                                        <a href={"/profile/?user="+userProfile._id}>
                                                                         <img className="me-2" style={{minHeight:40, minWidth:40, height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
-                                                                        src={userProfile.defaultProfile}></img>
+                                                                        src={userProfile.defaultProfile}></img></a>
                                                                         <div className="d-flex flex-column justify-content-center">
                                                                             <div className="text-break">
+                                                                            <a href= {"/profile/?user="+p.author} className="text-dark" id="nameLink">
                                                                             {findName()}
+                                                                            </a>
                                                                             </div>
                                                                             <small className="text-muted" style={{fontSize:15}}>
                                                                             {p.date}
@@ -342,7 +349,7 @@ function Profile(){
                                                                     <div className="modal-body text-break">
                                                                         {p.caption}
                                                                         <div className="card" style={{ border: 0 }}>
-
+                                                                    
                                                                             {withImage()}
                                                                             <div className="btn-group mt-1 w-100" role="group" aria-label="Basic example">
                                                                                 <button type="button" className="btn btn-sm" id="postButton">
@@ -387,13 +394,17 @@ function Profile(){
 
                                                                                                 return (
                                                                                                     <div className="d-flex flex-start my-2" key={idc}>
+                                                                                                        <a href={"/profile/?user="+comment.author_id}>
                                                                                                         <img className="rounded-circle shadow-1-strong me-3"
                                                                                                             src={findProfilePic()} alt="avatar"style={{height:50,width:50,objectFit:"cover"}} />
+                                                                                                        </a>
                                                                                                         <div className="flex-grow-1 flex-shrink-1">
                                                                                                         <div className="forPadding">
                                                                                                                 <div className="d-flex  flex-column">
                                                                                                                     <p className="m-0 text-break">
-                                                                                                                        {findName()}
+                                                                                                                    <a href= {"/profile/?user="+comment.author_id} className="text-dark" id="nameLink">
+                                                                                                                    {findName()}
+                                                                                                                    </a>
                                                                                                                     </p>
                                                                                                                     <span className="small text-muted text-break">{comment.date} </span>
 
