@@ -306,9 +306,11 @@ function Home(){
                             <div className="card">
                                 <div className="card-body">
                                     <div className="d-flex ">
+                                    
+                                    <a href= {"/profile/?user="+user.currentUser._id}>
                                     <img className="" style={{minHeight:40, minWidth:40,height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
                                         src={user.currentUser.defaultProfile}>
-                                        </img>
+                                        </img></a>
                                     <h5 className="w-100 ms-2 m-0 d-flex flex-column justify-content-center">Whats in your mind, {user.currentUser.firstName}?</h5> 
                                     </div>
                                     

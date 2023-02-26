@@ -68,7 +68,7 @@ function Profile(){
                     Authorization:'Bearer '+token 
                 },
                 data:{
-                    followby:showUser
+                    followby:user.currentUser._id
                 }
             }) 
 
@@ -137,7 +137,7 @@ function Profile(){
                     Authorization:'Bearer '+token 
                 },
                 data:{
-                    removeby:showUser
+                    removeby:user.currentUser._id
                 }
             }) 
 
@@ -168,6 +168,93 @@ function Profile(){
             }        
             else{ 
                 let userProfile=user.users.find(u=>u._id===showUser)
+                function getFollowers(){
+
+                    return(
+                        <div className="list-group ">
+                        
+                           {userProfile.followers.map(function (f, idx) {
+                                function findName(){
+                                            var uu = user.users.find(item => item._id === f);
+                                            return uu.firstName+" "+uu.lastName
+                                        }
+                                function findEmail(){
+                                    var uu = user.users.find(item => item._id === f);
+                                    return uu.email
+                                }
+                                function findPicture(){
+                                    var uu = user.users.find(item => item._id === f);
+                                    return uu.defaultProfile
+                                }
+                                return(
+                                    <a href="#" key={idx} className="list-group-item list-group-item-action list-group-item-dark card p-2" style={{maxWidth: 540}}>
+                                    
+                                        <div className="row g-0" style={{gap:10}}>
+                                            <div className="col-md-2">
+                                            <img src={findPicture()} className="img-fluid rounded img-thumbnail" alt="profile"
+                                                style={{ maxWidth: 70, maxHeight: 70, minHeight: 70, minWidth: 70, objectFit: "cover", zIndex: 1 }} 
+                                            />
+                                            </div>
+                                            <div className="col text-start d-flex justify-content-center flex-column">
+                                            <div className="card-body p-0 d-flex justify-content-center flex-column" >
+                                                <h6 className="card-text text-break m-0 d-flex justify-content-start">{findName()}</h6>
+                                                <p className="card-text text-break"><small className="text-muted d-flex justify-content-start">@{findEmail()}</small></p>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </a>
+                                )
+                           })}
+                          
+    
+    
+                        </div>
+                    )
+                }
+    
+                function getFollowing(){
+    
+                    return(
+                        <div className="list-group ">
+                        
+                           {userProfile.following.map(function (f, idx) {
+                                function findName(){
+                                            var uu = user.users.find(item => item._id === f);
+                                            return uu.firstName+" "+uu.lastName
+                                        }
+                                function findEmail(){
+                                    var uu = user.users.find(item => item._id === f);
+                                    return uu.email
+                                }
+                                function findPicture(){
+                                    var uu = user.users.find(item => item._id === f);
+                                    return uu.defaultProfile
+                                }
+                                return(
+                                    <a href="#" key={idx} className="list-group-item list-group-item-action list-group-item-dark card p-2" style={{maxWidth: 540}}>
+                                    
+                                        <div className="row g-0" style={{gap:10}}>
+                                            <div className="col-md-2">
+                                            <img src={findPicture()} className="img-fluid rounded img-thumbnail" alt="profile"
+                                                style={{ maxWidth: 70, maxHeight: 70, minHeight: 70, minWidth: 70, objectFit: "cover", zIndex: 1 }} 
+                                            />
+                                            </div>
+                                            <div className="col text-start d-flex justify-content-center flex-column">
+                                            <div className="card-body p-0 d-flex justify-content-center flex-column" >
+                                                <h6 className="card-text text-break m-0 d-flex justify-content-start">{findName()}</h6>
+                                                <p className="card-text text-break"><small className="text-muted d-flex justify-content-start">@{findEmail()}</small></p>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </a>
+                                )
+                           })}
+    
+                        </div>
+                    )
+                }
                 if(userProfile===undefined){
                     return(
                         <div className="fs-1 text-muted h-75 d-inline-block w-100 d-flex justify-content-center align-items-center">Invalid Link.</div>
@@ -219,11 +306,45 @@ function Profile(){
                                         </div>
                                         <div className="px-3">
                                             <p className="mb-1 h5">{userProfile.followers.length}</p>
-                                            <p className="small text-muted mb-0">Followers</p>
+                                            <p className="small text-muted mb-0" data-bs-toggle="modal" data-bs-target="#followers" id="nameLink">Followers</p>
+
+                                                <div className="modal fade" id="followers" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Followers</h1>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                    {getFollowers()}
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="postButton">Close</button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
                                         </div>
                                         <div>
                                             <p className="mb-1 h5">{userProfile.following.length}</p>
-                                            <p className="small text-muted mb-0">Following</p>
+                                            <p className="small text-muted mb-0" data-bs-toggle="modal" data-bs-target="#following" id="nameLink">Following</p>
+                                                <div className="modal fade" id="following" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div className="modal-dialog ">
+                                                    <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Following</h1>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                    
+                                                   {getFollowing()}
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="postButton">Close</button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
                                         </div>
                                         </div>
                                     </div>

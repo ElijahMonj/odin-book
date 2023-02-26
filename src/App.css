@@ -108,4 +108,5 @@ nav{
 }
 #nameLink:hover{
   text-decoration: underline;
+  cursor: pointer;
 }

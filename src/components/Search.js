@@ -76,8 +76,8 @@ function Search(){
                     {sortedUsers.map(function(u, idx){
                         return (
                             <div className="card mb-3 mx-auto" key={idx} style={{maxWidth: 540 }}>
-                                <div className="row g-0">
-                                    <div className="col-md-4 mt-3 mb-3 text-center ps-3">
+                                <div className="row g-0 p-3">
+                                    <div className="col-md-4 mt-3 mb-3 text-center">
                                     <img src={u.defaultProfile} className="img-fluid img-thumbnail" alt="..."
                                         style={{maxWidth: 170, maxHeight: 170,minHeight: 170, minWidth: 170,objectFit:"cover",zIndex: 1}}
                                     />
