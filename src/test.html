@@ -26,32 +26,20 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <style>
-    body{
-	background-color: #E3E7F2;
-	font-family: 'Poppins', sans-serif;
+    .button-badge {
+  background-color: #9BA4B4;
+  text-decoration: none;
+  padding: 5px 10px;
+  position: relative;
+  display: inline-block;
+  border-radius: .2rem;
+  transition: all ease 0.4s;
+  border-radius: 50px;
 }
-.card{
-	width: 400px;
-	border: none;
-	border-radius: 20px;
-	margin-top: 25%;
+.button-badge:hover{
+  background-color: #394867;
 }
 
-.btn-primary{
-	border: none;
-	border-radius: 8px;
-	width: 80px;
-	color: #DFEFFF;
-	transform: translateY(-22px);
-	background-color: #5778F9!important;
-}
-.btn-primary:focus{
-	box-shadow: none;
-	outline: none;
-}
-.btn-primary:hover{
-	background-color: #007bff!important;
-}
     </style>
     
     <title>React App</title>
@@ -59,20 +47,16 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <!-- Example split danger button -->
-    <div class="container d-flex justify-content-center">
-      <div class="card p-3">
-        <div class="media">
-            <img src="https://imgur.com/ZnxJ2SY.png" class="mr-3">
-            <div class="media-body">
-              <h5 class="mt-2 mb-0">Anna Gibson</h5>
-             <div class="d-flex flex-row justify-content-between align-text-center">
-                <small class="text-muted">Creator</small>
-                <button class="btn btn-primary mr-2">Follow</button>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+
+    <a href="#" class="button-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-bell-fill" viewBox="0 0 16 16">
+        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+      </svg>
+    </a>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
 </html>

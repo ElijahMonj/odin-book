@@ -66,12 +66,18 @@ nav{
   background-color: #394867;
 }
 
-#notifBtn{
-  background-color: #F1F6F9; 
-  border-radius: 50%;
+.notif {
+  background-color: #394867;
+  text-decoration: none;
+  padding: 8px 9px;
+  position: relative;
+  display: inline-block;
+  border-radius: .2rem;
+  transition: all ease 0.4s;
+  border-radius: 50px;
 }
-#notifBtn:hover{
-  background-color: #9BA4B4;
+.notif:hover{
+  background-color: #24458b;
   
 }
 

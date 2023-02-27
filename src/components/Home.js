@@ -315,7 +315,7 @@ function Home(){
                                     </div>
                                     
                                     <textarea className="form-control my-3" id="textAreaExample" rows="2" style={{resize: "none"}} maxLength="200"></textarea>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                             <div class="modal-header">

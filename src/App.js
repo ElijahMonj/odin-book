@@ -12,6 +12,7 @@ import Chat from './components/Chat'
 import Post from './components/Post'
 import Search from './components/Search'
 import Signup from './components/Signup'
+import Settings from './components/Settings';
 import {Link, NavLink} from 'react-router-dom'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/post' element={<Post/>}/>
         <Route path='/search' element={<Search/>}/>
         <Route path='/signup' element={<Signup/>}/>
+        <Route path='/settings' element={<Settings/>}/>
         </Routes>
       </div>
       

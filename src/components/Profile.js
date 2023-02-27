@@ -273,6 +273,13 @@ function Profile(){
                         }
                         
                     }
+                    function checkPost(){  
+                        if (userProfile.posts.length===0){
+                          return (<div className="text-muted text-center">No posts yet.</div>)
+                        }else{
+                            return (<div className="text-muted text-center">End of posts.</div>)
+                        }
+                    }
                     return(
                         <section className="h-100 gradient-custom-2">
                             <div className="container h-100">
@@ -302,11 +309,11 @@ function Profile(){
                                         
                                         <div>
                                             <p className="mb-1 h5">{userProfile.posts.length}</p>
-                                            <p className="small text-muted mb-0">Posts</p>
+                                            <a href="#recentPosts" id="nameLink" className="small text-muted mb-0">Posts</a>
                                         </div>
                                         <div className="px-3">
                                             <p className="mb-1 h5">{userProfile.followers.length}</p>
-                                            <p className="small text-muted mb-0" data-bs-toggle="modal" data-bs-target="#followers" id="nameLink">Followers</p>
+                                            <a className="small text-muted mb-0" data-bs-toggle="modal" data-bs-target="#followers" id="nameLink">Followers</a>
 
                                                 <div className="modal fade" id="followers" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div className="modal-dialog">
@@ -327,7 +334,7 @@ function Profile(){
                                         </div>
                                         <div>
                                             <p className="mb-1 h5">{userProfile.following.length}</p>
-                                            <p className="small text-muted mb-0" data-bs-toggle="modal" data-bs-target="#following" id="nameLink">Following</p>
+                                            <a className="small text-muted mb-0" data-bs-toggle="modal" data-bs-target="#following" id="nameLink">Following</a>
                                                 <div className="modal fade" id="following" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div className="modal-dialog ">
                                                     <div className="modal-content">
@@ -360,7 +367,7 @@ function Profile(){
                                         </div>
                                         </div>
                                         <div className="d-flex justify-content-between align-items-center mb-4">
-                                        <p className="lead fw-normal mb-0">Recent posts</p>
+                                        <p className="lead fw-normal mb-0" id="recentPosts">Recent posts</p>
                                         
                                         </div>
 
@@ -579,7 +586,7 @@ function Profile(){
                                             )
                                         })}
                                         
-                                        <div className="text-muted text-center">End of posts.</div>
+                                        {checkPost()}
                                     </div>
                                     </div>
                                 </div>
