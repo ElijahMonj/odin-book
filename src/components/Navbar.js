@@ -67,7 +67,14 @@ function NavigationBar() {
         return (<div className="text-muted text-center">No notifications yet.</div>)
       }
     }
-      
+    function checkIfClicked(){
+      const element = document.getElementById('offcanvasNavbarDropdown-expand-md').classList
+      if(element.contains('show')){
+        alert("turn on")
+      }else{
+        alert("turn off")
+      }
+    } 
     function isLoggedIn(){
         if (user===0){
             return(
@@ -122,8 +129,9 @@ function NavigationBar() {
                               <NavDropdown 
                               align="end"
                               className="align-items-center notifIcon"
+                              
                               title={
-                                <div className="notif pull-left">
+                                <div className="notif pull-left ">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" className="bi bi-bell-fill" viewBox="0 0 16 16">
                                     <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
                                   </svg>
@@ -133,7 +141,7 @@ function NavigationBar() {
 
                                 >
                                 
-                                <h4 className="ms-3 text-break" style={{width:300}}>Notifications</h4>
+                                <h4 className="ms-3 text-break" style={{width:229}}>Notifications</h4>
                                 <NavDropdown.Divider />
                                 {checkNotifications()}
                                 {user.currentUser.notifications.map(function(notif, idc){

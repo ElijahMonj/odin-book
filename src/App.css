@@ -116,3 +116,11 @@ nav{
   text-decoration: underline;
   cursor: pointer;
 }
+
+.notifIcon > .dropdown-menu {
+
+  overflow-y: scroll;
+  
+  height: 500px;
+  
+  }

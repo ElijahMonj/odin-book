@@ -1,11 +1,11 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import {Link, NavLink} from 'react-router-dom'
+import NavigationBar from "./Navbar";
 function About(){
     
-    
-
-    return(
+    function showAbout(){
+      return(
         <section className="text-center mx-auto">
             <h1>Main website heading (h1)</h1>
 
@@ -102,8 +102,8 @@ function About(){
   
 
             <div className="text-center p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
-              © 2020 Copyright:
-              <a className="text-dark"  href="https://mdbootstrap.com/">Elijah Monjardin</a> - All rights reserved.
+              © 2023 Copyright: 
+              <a className="text-dark m-1"  href="https://mdbootstrap.com/">Elijah Monjardin</a> - All rights reserved.
 
             </div>
 
@@ -111,6 +111,15 @@ function About(){
           </footer>
             
           </section>
+      )
+    }
+
+    return(
+      <div className="container-fluid p-0" >
+      <NavigationBar/>
+        {showAbout()}
+      </div>
+        
     )
 } 
 

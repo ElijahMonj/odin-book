@@ -47,9 +47,15 @@ function Settings(){
     }
 
     return(
-        <div className="container-fluid">
+        <div className="container-fluid p-0 m-0">
             {isAuthenticated()}
-            Settings
+            change password
+            <br></br>
+            change name
+            <br></br>
+            change birthday
+            <br></br>
+            change profile picture
         </div>
     )
 } 
