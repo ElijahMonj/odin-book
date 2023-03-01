@@ -6,84 +6,66 @@ import NavigationBar from './Navbar'
 
 import { useNavigate } from 'react-router-dom';
 function Myprofile() {
-    const URL = "http://localhost:3002/users/"
-
-
+    const URL="http://localhost:4000/"
     const [user, setUser] = useState(0)
     const navigate = useNavigate();
-    useEffect(() => {
-        const fetchData = async () => {
-
-            let token = window.localStorage.getItem("token");
+    useEffect(()=>{
+        const fetchData = () => {
             try {
-                const result = await axios({
-                    method: 'GET',
+                axios({
+                    method: "GET",
+                    withCredentials: true,
                     url: URL,
-                    headers: {
-                        Authorization: 'Bearer ' + token
-                    }
-                })
-
-                console.log(result.data)
-
-                setUser(result.data)
-
-
+                  }).then((res) => {
+                    setUser(res.data);
+                    console.log(res.data);
+                  });
             } catch (error) {
                 console.log(error)
                 setUser(1)
             }
-
-        }
-
+                
+        };
+        
         console.log("Fetching data...")
         fetchData();
-
-    }, []);
-    async function refresh() {
-        let token = window.localStorage.getItem("token");
-        const fetchData = async () => {
-
-
+        
+    },[]);
+    async function refresh(){
+        const fetchData = () => {
             try {
-                const result = await axios({
-                    method: 'GET',
-                    url: URL,
-                    headers: {
-                        Authorization: 'Bearer ' + token
-                    }
-                })
-
-                console.log(result.data)
-
-                setUser(result.data)
-
-
+                axios({
+                    method: "GET",
+                    withCredentials: true,
+                    url: "http://localhost:4000/",
+                  }).then((res) => {
+                    setUser(res.data);
+                    console.log(res.data);
+                  });
             } catch (error) {
                 console.log(error)
                 setUser(1)
             }
-
-        }
-
+                
+        };
+        
         console.log("Fetching data...")
         fetchData();
     }
     async function editBio() {
-        let token = window.localStorage.getItem("token");
+        
         try {
-            const res = await axios({
-                method: 'PATCH',
-                url: URL + user.currentUser._id + "/bio",
-                headers: {
-                    Authorization: 'Bearer ' + token
-                },
+            
+            axios({
+                method: "PATCH",
                 data: {
                     bio: document.getElementById('newBio').value
-                }
-            })
+                },
+                withCredentials: true,
+                url: URL + user.currentUser._id + "/bio",
+              }).then((res) => refresh());
 
-            console.log(res)
+            
             document.getElementById('newBio').value = ""
             refresh()
         } catch (error) {
@@ -95,15 +77,19 @@ function Myprofile() {
     
 
     function isAuthenticated() {
+       console.log(user)
         if (user === 0) {
-            console.log("Loading")
-        } else if (user === 1) {
-            console.log("Redirect")
-        } else {
+            return(
+                <div>LOADING....</div>
+            )
+        } else if ((user===1||user.username==="Please Login")) {
+            navigate('/')
+        } else if (user.username!=="Please Login")  {
 
             function getFollowers(){
 
                 return(
+                    
                     <div className="list-group ">
                     
                        {user.currentUser.followers.map(function (f, idx) {
@@ -122,16 +108,16 @@ function Myprofile() {
                             return(
                                 <a href="#" key={idx} className="list-group-item list-group-item-action list-group-item-dark card p-2" style={{maxWidth: 540}}>
                                 
-                                    <div class="row g-0" style={{gap:10}}>
-                                        <div class="col-md-2">
-                                        <img src={findPicture()} class="img-fluid rounded img-thumbnail" alt="profile"
+                                    <div className="row g-0" style={{gap:10}}>
+                                        <div className="col-md-2">
+                                        <img src={findPicture()} className="img-fluid rounded img-thumbnail" alt="profile"
                                             style={{ maxWidth: 70, maxHeight: 70, minHeight: 70, minWidth: 70, objectFit: "cover", zIndex: 1 }} 
                                         />
                                         </div>
-                                        <div class="col text-start d-flex justify-content-center flex-column">
-                                        <div class="card-body p-0 d-flex justify-content-center flex-column" >
-                                            <h6 class="card-text text-break m-0 d-flex justify-content-start">{findName()}</h6>
-                                            <p class="card-text text-break"><small class="text-muted d-flex justify-content-start">@{findEmail()}</small></p>
+                                        <div className="col text-start d-flex justify-content-center flex-column">
+                                        <div className="card-body p-0 d-flex justify-content-center flex-column" >
+                                            <h6 className="card-text text-break m-0 d-flex justify-content-start">{findName()}</h6>
+                                            <p className="card-text text-break"><small className="text-muted d-flex justify-content-start">@{findEmail()}</small></p>
                                         </div>
                                         </div>
                                     </div>
@@ -167,16 +153,16 @@ function Myprofile() {
                             return(
                                 <a href="#" key={idx} className="list-group-item list-group-item-action list-group-item-dark card p-2" style={{maxWidth: 540}}>
                                 
-                                    <div class="row g-0" style={{gap:10}}>
-                                        <div class="col-md-2">
-                                        <img src={findPicture()} class="img-fluid rounded img-thumbnail" alt="profile"
+                                    <div className="row g-0" style={{gap:10}}>
+                                        <div className="col-md-2">
+                                        <img src={findPicture()} className="img-fluid rounded img-thumbnail" alt="profile"
                                             style={{ maxWidth: 70, maxHeight: 70, minHeight: 70, minWidth: 70, objectFit: "cover", zIndex: 1 }} 
                                         />
                                         </div>
-                                        <div class="col text-start d-flex justify-content-center flex-column">
-                                        <div class="card-body p-0 d-flex justify-content-center flex-column" >
-                                            <h6 class="card-text text-break m-0 d-flex justify-content-start">{findName()}</h6>
-                                            <p class="card-text text-break"><small class="text-muted d-flex justify-content-start">@{findEmail()}</small></p>
+                                        <div className="col text-start d-flex justify-content-center flex-column">
+                                        <div className="card-body p-0 d-flex justify-content-center flex-column" >
+                                            <h6 className="card-text text-break m-0 d-flex justify-content-start">{findName()}</h6>
+                                            <p className="card-text text-break"><small className="text-muted d-flex justify-content-start">@{findEmail()}</small></p>
                                         </div>
                                         </div>
                                     </div>
@@ -196,7 +182,8 @@ function Myprofile() {
                 }
             }
             return (
-
+                <div className="container-fluid" style={{padding:0}}>
+                    <NavigationBar></NavigationBar>
                 <section className="h-100 gradient-custom-2">
                     <div className="container h-100">
                         <div className="row d-flex justify-content-center align-items-center pt-5">
@@ -230,7 +217,7 @@ function Myprofile() {
                                                 <p className="mb-1 h5">{user.currentUser.followers.length}</p>
                                                 <a className="small text-muted mb-0" data-bs-toggle="modal" data-bs-target="#followers" id="nameLink">Followers</a>
 
-                                                <div className="modal fade" id="followers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div className="modal fade" id="followers" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div className="modal-dialog">
                                                     <div className="modal-content">
                                                     <div className="modal-header">
@@ -250,7 +237,7 @@ function Myprofile() {
                                             <div>
                                                 <p className="mb-1 h5">{user.currentUser.following.length}</p>
                                                 <a className="small text-muted mb-0" data-bs-toggle="modal" data-bs-target="#following" id="nameLink">Following</a>
-                                                <div className="modal fade" id="following" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div className="modal fade" id="following" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div className="modal-dialog ">
                                                     <div className="modal-content">
                                                     <div className="modal-header">
@@ -314,8 +301,6 @@ function Myprofile() {
                                             async function newComment(e) {
                                                 e.preventDefault()
 
-                                                let token = window.localStorage.getItem("token");
-
                                                 const d = new Date();
                                                 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                                                 let date = month[d.getMonth()] + " " + d.getDate() + " " + d.getFullYear()
@@ -324,18 +309,17 @@ function Myprofile() {
                                                 const postDate = date + ", " + time
 
                                                 try {
-                                                    const res = await axios({
-                                                        method: 'PATCH',
-                                                        url: URL + p.author + "/posts/" + p.id + "/newComment",
-                                                        headers: {
-                                                            Authorization: 'Bearer ' + token
-                                                        },
+                                                    
+                                                    axios({
+                                                        method: "PATCH",
                                                         data: {
                                                             author_id: user.currentUser._id,
                                                             date: postDate,
                                                             content: document.getElementById('writeComment'+p.id).value
-                                                        }
-                                                    })
+                                                        },
+                                                        withCredentials: true,
+                                                        url: URL + p.author + "/posts/" + p.id + "/newComment",
+                                                    }).then((res) => refresh());
                                                     document.getElementById('writeComment'+p.id).value = ""
                                                     refresh()
                                                 } catch (error) {
@@ -532,6 +516,7 @@ function Myprofile() {
                         </div>
                     </div>
                 </section>
+                </div>
             )
 
         }
@@ -540,7 +525,7 @@ function Myprofile() {
 
     return (
         <div className="container-fluid p-0 forBG" >
-            <NavigationBar></NavigationBar>
+            
             {isAuthenticated()}
 
         </div>

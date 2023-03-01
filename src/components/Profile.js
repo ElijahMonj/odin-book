@@ -6,36 +6,29 @@ import NavigationBar from './Navbar'
 
 import { useNavigate } from 'react-router-dom';
 function Profile(){
-    const URL="http://localhost:3002/users/"
+    const URL="http://localhost:4000/"
     const [searchParams,setSearchParams]=useSearchParams()
     const showUser=searchParams.get('user')
     
     const [user, setUser]=useState(0)
     const navigate = useNavigate();
     useEffect(()=>{
-        const fetchData = async ()=>{
-        
-            let token=window.localStorage.getItem("token");
+        const fetchData = () => {
             try {
-               const result = await axios({
-                   method:'GET',
-                   url:URL,
-                   headers:{
-                       Authorization:'Bearer '+token 
-                   }
-               }) 
-
-            console.log(result.data)
-               
-            setUser(result.data)
-           
-               
+                axios({
+                    method: "GET",
+                    withCredentials: true,
+                    url: URL,
+                  }).then((res) => {
+                    setUser(res.data);
+                    console.log(res.data);
+                  });
             } catch (error) {
                 console.log(error)
                 setUser(1)
             }
-            
-        }
+                
+        };
         
         console.log("Fetching data...")
         fetchData();
@@ -43,36 +36,30 @@ function Profile(){
     },[]);
     async function follow(){
         let token=window.localStorage.getItem("token");
-        try {
-            const res = await axios({
-                method:'PATCH',
-                url:URL+"addfollowing/"+user.currentUser._id+"/"+showUser+"/",
-                headers:{
-                    Authorization:'Bearer '+token 
-                },
+        try {         
+            axios({
+                method: "PATCH",
                 data:{
                     tofollow:showUser
-                }
-            }) 
-
-         console.log(res)
+                },
+                withCredentials: true,
+                url: URL+"addfollowing/"+user.currentUser._id+"/"+showUser+"/",
+              }).then((res) => refresh());
 
          } catch (error) {
              console.log(error)
          }
          try {
-            const res = await axios({
-                method:'PATCH',
-                url:URL+"addfollowers/"+showUser+"/"+user.currentUser._id+"/",
-                headers:{
-                    Authorization:'Bearer '+token 
-                },
+            
+            axios({
+                method: "PATCH",
                 data:{
                     followby:user.currentUser._id
-                }
-            }) 
+                },
+                withCredentials: true,
+                url:URL+"addfollowers/"+showUser+"/"+user.currentUser._id+"/",
+              }).then((res) => refresh());
 
-         console.log(res)
 
          } catch (error) {
              console.log(error)
@@ -81,68 +68,54 @@ function Profile(){
 
     }
     async function refresh(){
-        let token=window.localStorage.getItem("token");
-        const fetchData = async ()=>{
-        
-            
+        const fetchData = () => {
             try {
-               const result = await axios({
-                   method:'GET',
-                   url:URL,
-                   headers:{
-                       Authorization:'Bearer '+token 
-                   }
-               }) 
-
-            console.log(result.data)
-               
-            setUser(result.data)
-           
-               
+                axios({
+                    method: "GET",
+                    withCredentials: true,
+                    url: "http://localhost:4000/",
+                  }).then((res) => {
+                    setUser(res.data);
+                    console.log(res.data);
+                  });
             } catch (error) {
                 console.log(error)
                 setUser(1)
             }
-            
-        }
+                
+        };
         
         console.log("Fetching data...")
         fetchData();
     }
 
     async function unfollow(){
-        let token=window.localStorage.getItem("token");
+        
         try {
-            const res = await axios({
-                method:'PATCH',
-                url:URL+"removefollowing/"+user.currentUser._id+"/"+showUser+"/",
-                headers:{
-                    Authorization:'Bearer '+token 
-                },
+             
+            axios({
+                method: "PATCH",
                 data:{
                     toremove:showUser
-                }
-            }) 
-
-         console.log(res)
+                },
+                withCredentials: true,
+                url:URL+"removefollowing/"+user.currentUser._id+"/"+showUser+"/",
+              }).then((res) => refresh());
 
          } catch (error) {
              console.log(error)
          }
          try {
-            const res = await axios({
-                method:'PATCH',
-                url:URL+"removefollowers/"+showUser+"/"+user.currentUser._id+"/",
-                headers:{
-                    Authorization:'Bearer '+token 
-                },
+            
+            axios({
+                method: "PATCH",
                 data:{
                     removeby:user.currentUser._id
-                }
-            }) 
-
-         console.log(res)
-
+                },
+                withCredentials: true,
+                url:URL+"removefollowers/"+showUser+"/"+user.currentUser._id+"/",
+              }).then((res) => refresh());
+         
          } catch (error) {
              console.log(error)
          }
@@ -151,14 +124,16 @@ function Profile(){
     }
     function isAuthenticated(){
         if(user===0){
-            console.log("Loading")
-        }else if(user===1){
-            console.log("Redirect")
-        }else if(showUser===user.currentUser._id){
-            navigate('/myprofile')
-          }
-        else{
-            
+            return(
+                <div>LOADING....</div>
+            )
+        }else if(user===1||user.username==="Please Login"){
+            navigate('/')
+        }
+        else if (user.username!=="Please Login"){
+            if(showUser===user.currentUser._id){
+                navigate('/myprofile')
+            }else{
             if(showUser===""){
                 return(
                     <div className="fs-1 text-muted h-75 d-inline-block w-100 d-flex justify-content-center align-items-center">Invalid Link.</div>
@@ -186,8 +161,9 @@ function Profile(){
                                     var uu = user.users.find(item => item._id === f);
                                     return uu.defaultProfile
                                 }
+                                
                                 return(
-                                    <a href="#" key={idx} className="list-group-item list-group-item-action list-group-item-dark card p-2" style={{maxWidth: 540}}>
+                                    <a href={"/profile/?user="+f} key={idx} className="list-group-item list-group-item-action list-group-item-dark card p-2" style={{maxWidth: 540}}>
                                     
                                         <div className="row g-0" style={{gap:10}}>
                                             <div className="col-md-2">
@@ -232,7 +208,7 @@ function Profile(){
                                     return uu.defaultProfile
                                 }
                                 return(
-                                    <a href="#" key={idx} className="list-group-item list-group-item-action list-group-item-dark card p-2" style={{maxWidth: 540}}>
+                                    <a href={"/profile/?user="+f} key={idx} className="list-group-item list-group-item-action list-group-item-dark card p-2" style={{maxWidth: 540}}>
                                     
                                         <div className="row g-0" style={{gap:10}}>
                                             <div className="col-md-2">
@@ -387,18 +363,17 @@ function Profile(){
                                                 const postDate = date + ", " + time
 
                                                 try {
-                                                    const res = await axios({
-                                                        method: 'PATCH',
-                                                        url: URL + p.author + "/posts/" + p.id + "/newComment",
-                                                        headers: {
-                                                            Authorization: 'Bearer ' + token
-                                                        },
-                                                        data: {
+                                                    
+                                                    axios({
+                                                        method: "PATCH",
+                                                        data:{
                                                             author_id: user.currentUser._id,
                                                             date: postDate,
                                                             content: document.getElementById('writeComment'+p.id).value
-                                                        }
-                                                    })
+                                                        },
+                                                        withCredentials: true,
+                                                        url: URL + p.author + "/posts/" + p.id + "/newComment",
+                                                    }).then((res) => refresh());
                                                     document.getElementById('writeComment'+p.id).value = ""
                                                     refresh()
                                                 } catch (error) {
@@ -597,7 +572,7 @@ function Profile(){
                 }
                 
             }
-            
+        }
         }
         
     }

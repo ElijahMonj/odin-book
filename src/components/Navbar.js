@@ -1,8 +1,6 @@
 import React from "react";
 import {Link, NavLink} from 'react-router-dom'
 import 'bootstrap/js/dist/dropdown';
-import defProfile from './images/user.png'
-import searchIcon from './images/search.svg'
 import { useState,useEffect } from "react";
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
@@ -16,44 +14,75 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useNavigate } from 'react-router-dom';
 
 function NavigationBar() {
-    const URL="http://localhost:3002/users/"
-    const navigate = useNavigate();
     
-
+    const navigate = useNavigate();
+    const URL="http://localhost:4000/"
     const [user, setUser]=useState(0)
     useEffect(()=>{
-        const fetchData = async ()=>{
-        
-            let token=window.localStorage.getItem("token");
+        const fetchData = () => {
             try {
-               const result = await axios({
-                   method:'GET',
-                   url:URL,
-                   headers:{
-                       Authorization:'Bearer '+token 
-                   }
-               }) 
-
-               console.log(result.data)
-               setUser(result.data)
-
+                axios({
+                    method: "GET",
+                    withCredentials: true,
+                    url: URL,
+                  }).then((res) => {
+                    setUser(res.data);
+                    console.log(res.data);
+                  });
             } catch (error) {
                 console.log(error)
+                setUser(1)
+            }
                 
-            } 
-        }
+        };
         
         console.log("Fetching data...")
         fetchData();
         
     },[]);
+    async function refresh(){
+      const fetchData = () => {
+          try {
+              axios({
+                  method: "GET",
+                  withCredentials: true,
+                  url: "http://localhost:4000/",
+                }).then((res) => {
+                  setUser(res.data);
+                  console.log(res.data);
+                });
+          } catch (error) {
+              console.log(error)
+              setUser(1)
+          }
+              
+      };
+      
+      console.log("Fetching data...")
+      fetchData();
+  }
     function userAccountName(){
         return user.currentUser.firstName+" "+user.currentUser.lastName
     }
-    function logOut(){
-        window.localStorage.setItem("token", 0);
-        navigate(`/`);
-        window.location.reload(true)    
+    function logOut(){ 
+      
+        try {
+            axios({
+                method: "POST",
+                withCredentials: true,
+                url: "http://localhost:4000/logout",
+              }).then((res) => {
+                console.log(res)
+                
+                //navigate('/')
+                window.location.reload(true)
+              });
+        } catch (error) {
+            console.log(error)
+            setUser(1)
+        }
+        setUser(1) 
+                 
     }
     function search(e){
       e.preventDefault();
@@ -76,11 +105,11 @@ function NavigationBar() {
       }
     } 
     function isLoggedIn(){
-        if (user===0){
-            return(
-                <div>Loading...</div>
-            )
-        }else{
+            if ((user === 0)||(user === 1)) {
+              return(
+                <div>LOADING....</div>
+              )
+            } if(user.username!=="Please Login"){
             return (  
                 <>
                   {['md'].map((expand) => (
@@ -221,7 +250,7 @@ function NavigationBar() {
                                   About
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item as={Link} to={'/'} onClick={logOut}>
+                                <NavDropdown.Item onClick={logOut}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-person-lines-fill mb-1 me-2" viewBox="0 0 16 16">
                                 <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
                                 <path fillRule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>

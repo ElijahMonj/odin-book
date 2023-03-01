@@ -4,33 +4,24 @@ import {Link, NavLink} from 'react-router-dom'
 import axios from 'axios';
 import NavigationBar from './Navbar'
 function Settings(){
-    const URL="http://localhost:3002/users/"
+    const URL="http://localhost:4000/"
     const [user, setUser]=useState(0)
     useEffect(()=>{
-        const fetchData = async ()=>{
-        
-            let token=window.localStorage.getItem("token");
+        const fetchData = () => {
             try {
-               const result = await axios({
-                   method:'GET',
-                   url:URL,
-                   headers:{
-                       Authorization:'Bearer '+token 
-                   }
-               }) 
-
-            console.log(result.data)
-               
-            setUser(result.data)
-           
-               
+                axios({
+                    method: "GET",
+                    withCredentials: true,
+                    url: URL,
+                  }).then((res) => {
+                    setUser(res.data);
+                    console.log(res.data);
+                  });
             } catch (error) {
                 console.log(error)
                 setUser(1)
-            }
-            
-        }
-        
+            }              
+        };  
         console.log("Fetching data...")
         fetchData();
         

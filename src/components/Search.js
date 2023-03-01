@@ -5,35 +5,28 @@ import axios from 'axios';
 import NavigationBar from './Navbar'
 import { useNavigate } from 'react-router-dom';
 function Search(){
-    const URL="http://localhost:3002/users/"
+    const URL="http://localhost:4000/"
     const [searchParams,setSearchParams]=useSearchParams()
     const showUser=searchParams.get('filter')
     const [user, setUser]=useState(0)
     const navigate = useNavigate()
     useEffect(()=>{
-        const fetchData = async ()=>{
-        
-            let token=window.localStorage.getItem("token");
+        const fetchData = () => {
             try {
-               const result = await axios({
-                   method:'GET',
-                   url:URL,
-                   headers:{
-                       Authorization:'Bearer '+token 
-                   }
-               }) 
-
-            console.log(result.data)
-               
-            setUser(result.data)
-           
-               
+                axios({
+                    method: "GET",
+                    withCredentials: true,
+                    url: "http://localhost:4000/",
+                  }).then((res) => {
+                    setUser(res.data);
+                    console.log(res.data);
+                  });
             } catch (error) {
                 console.log(error)
                 setUser(1)
             }
-            
-        }
+                
+        };
         
         console.log("Fetching data...")
         fetchData();
@@ -43,9 +36,11 @@ function Search(){
         
        
         if(user===0){
-            console.log("Loading")
-        }else if(user===1){
-            console.log("Redirect")
+            return(
+                <div>LOADING....</div>
+            )
+        }else if((user===1||user.username==="Please Login")){
+            navigate('/')
         }
         else{
             let sortedUsers;

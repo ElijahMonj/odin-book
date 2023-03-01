@@ -3,37 +3,31 @@ import axios from 'axios';
 import { useState,useEffect } from "react";
 import {Link, NavLink} from 'react-router-dom'
 import NavigationBar from './Navbar'
+import { useNavigate } from 'react-router-dom';
 
 function Home(){
     //window.localStorage.setItem("token", 0);
     //const URL="https://odin-book-api-production-5397.up.railway.app/users";
-    const URL="http://localhost:3002/users/"
+    const navigate = useNavigate();
+    const URL="http://localhost:4000/"
     const [user, setUser]=useState(0)
     useEffect(()=>{
-        const fetchData = async ()=>{
-            
-            let token=window.localStorage.getItem("token");
-            
+        const fetchData = () => {
             try {
-               const result = await axios({
-                   method:'GET',
-                   url:URL,
-                   headers:{
-                       Authorization:'Bearer '+token 
-                   }
-               }) 
-
-            console.log(result.data)
-               
-            setUser(result.data)
-           
-               
+                axios({
+                    method: "GET",
+                    withCredentials: true,
+                    url: URL,
+                  }).then((res) => {
+                    setUser(res.data);
+                    console.log(res.data);
+                  });
             } catch (error) {
                 console.log(error)
                 setUser(1)
             }
-            
-        }
+                
+        };
         
         console.log("Fetching data...")
         fetchData();
@@ -45,15 +39,28 @@ function Home(){
         let email=document.getElementById('email').value
         let password=document.getElementById('password').value
         try {
-            const login_result=await axios({
-                method:'POST',
-                url:URL+'login',
-                data:{
-                    email,
-                    password
+            axios({
+                method: "POST",
+                data: {
+                  username: email,
+                  password: password,
+                },
+                withCredentials: true,
+                url: "http://localhost:4000/login",
+              }).then((res) => {
+                  console.log(res)
+                if(res.data.message!==undefined){
+                
+                    if(res.data.message=="Email does not exist."){
+                        document.getElementById('formEmail').style.color='red'
+                        document.getElementById('emailName').innerHTML="Invalid email or password."
+                    }
+                }else{
+                    refresh()
                 }
-            })
-            
+              });
+             
+            /*
             if(login_result.data.message!==undefined){
                 
                 if(login_result.data.message=="Email does not exist."){
@@ -64,16 +71,15 @@ function Home(){
                     document.getElementById('passwordName').innerHTML="Wrong password."
                 }
             }
-            window.localStorage.setItem("token", login_result.data.token);
-
-
+            */
             
-            refresh()
+           
             //setUser(login_result.data)
             
         } catch (error) {
             alert("Connection Refused.")
         }
+        
        
     }
     function checkPost(){
@@ -130,37 +136,29 @@ function Home(){
         document.getElementById('passwordName').innerHTML="Password"
     } 
     async function refresh(){
-        let token=window.localStorage.getItem("token");
-        const fetchData = async ()=>{
-        
-            
+        const fetchData = () => {
             try {
-               const result = await axios({
-                   method:'GET',
-                   url:URL,
-                   headers:{
-                       Authorization:'Bearer '+token 
-                   }
-               }) 
-
-            console.log(result.data)
-               
-            setUser(result.data)
-           
-               
+                axios({
+                    method: "GET",
+                    withCredentials: true,
+                    url: "http://localhost:4000/",
+                  }).then((res) => {
+                    setUser(res.data);
+                    console.log(res.data);
+                  });
             } catch (error) {
                 console.log(error)
                 setUser(1)
             }
-            
-        }
+                
+        };
         
         console.log("Fetching data...")
         fetchData();
     }
     async function newPost(){
        
-        let token=window.localStorage.getItem("token");
+        
         
         const d = new Date();
         const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -171,12 +169,9 @@ function Home(){
         
        
         try {
-            const res = await axios({
-                method:'PATCH',
-                url:URL+user.currentUser._id+"/newPost/",
-                headers:{
-                    Authorization:'Bearer '+token
-                },
+            
+            axios({
+                method: "PATCH",
                 data:{
                     author:user.currentUser._id,
                     date:postDate,
@@ -184,9 +179,10 @@ function Home(){
                     comments:[],
                     likes:[],
                     picture:document.getElementById('imageLink').innerHTML    
-                }
-            }) 
-
+                },
+                withCredentials: true,
+                url:URL+user.currentUser._id+"/newPost/",
+              }).then((res) => refresh());
             const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
             const alert = (message, type) => {
@@ -225,7 +221,7 @@ function Home(){
         
     }
     function homepage(){
-        if((window.localStorage.getItem("token"))===0||user===1){
+        if(user===1||user.username==="Please Login"){
            
             return(
                
@@ -293,7 +289,7 @@ function Home(){
             return(
                 <div>LOADING....</div>
             )
-        }else if((window.localStorage.getItem("token"))!==0){
+        }else if(user.username!=="Please Login"){
             
             return(
                 <div className="container-fluid" style={{padding:0}}>
@@ -387,7 +383,17 @@ function Home(){
                                         date:postDate,
                                         content:document.getElementById('writeComment'+p.id).value    
                                     }
-                                }) 
+                                })
+                                axios({
+                                    method: "PATCH",
+                                    data:{
+                                        author_id:user.currentUser._id,
+                                        date:postDate,
+                                        content:document.getElementById('writeComment'+p.id).value    
+                                    },
+                                    withCredentials: true,
+                                    url:URL+p.author+"/posts/"+p.id+"/newComment",
+                                }).then((res) => refresh()); 
                                 document.getElementById('writeComment'+p.id).value=""
                                 refresh()
                             } catch (error) {

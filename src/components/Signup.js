@@ -14,26 +14,35 @@ function Signup(){
             document.getElementById('warning').style.display="none"
             
             try {
-                const registerResult=await axios({
-                    method:'POST',
-                    url:URL+'register',
-                    data:{
-                        firstName:document.getElementById('firstName').value,
-                        lastName:document.getElementById('lastName').value,
-                        email:document.getElementById('email').value,
-                        password:document.getElementById('password').value,
-                        birthDay:document.getElementById('birthday').value,
-                    }
-                })
-                console.log(registerResult) 
-                if(registerResult.status===201){
-                    navigate(`/`);
-                }              
+                
+                    axios({
+                        method: "POST",
+                        data: {
+                            firstName:document.getElementById('firstName').value,
+                            lastName:document.getElementById('lastName').value,
+                            email:document.getElementById('email').value,
+                            password:document.getElementById('password').value,
+                            birthDay:document.getElementById('birthday').value,
+                        },
+                        withCredentials: true,
+                        url: "http://localhost:4000/register",
+                      }).then((res) => {
+                        if(res.status===201){
+                            navigate(`/`);
+                        }else{
+                            alert("User already exist")
+                        }   
+                      });
+                 
+                           
                 
             } catch (error) {
                 console.log(error)
             }
         }
+       
+        
+          
         
         
     }
