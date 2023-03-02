@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 function NavigationBar() {
     
     const navigate = useNavigate();
-    const URL="http://localhost:4000/"
+    const URL=process.env.REACT_APP_API_URL
     const [user, setUser]=useState(0)
     useEffect(()=>{
         const fetchData = () => {
@@ -46,7 +46,7 @@ function NavigationBar() {
               axios({
                   method: "GET",
                   withCredentials: true,
-                  url: "http://localhost:4000/",
+                  url: URL,
                 }).then((res) => {
                   setUser(res.data);
                   console.log(res.data);
@@ -70,7 +70,7 @@ function NavigationBar() {
             axios({
                 method: "POST",
                 withCredentials: true,
-                url: "http://localhost:4000/logout",
+                url: URL+"logout",
               }).then((res) => {
                 console.log(res)
                 

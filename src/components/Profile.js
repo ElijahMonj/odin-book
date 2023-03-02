@@ -6,7 +6,7 @@ import NavigationBar from './Navbar'
 
 import { useNavigate } from 'react-router-dom';
 function Profile(){
-    const URL="http://localhost:4000/"
+    const URL=process.env.REACT_APP_API_URL
     const [searchParams,setSearchParams]=useSearchParams()
     const showUser=searchParams.get('user')
     
@@ -73,7 +73,7 @@ function Profile(){
                 axios({
                     method: "GET",
                     withCredentials: true,
-                    url: "http://localhost:4000/",
+                    url: URL,
                   }).then((res) => {
                     setUser(res.data);
                     console.log(res.data);

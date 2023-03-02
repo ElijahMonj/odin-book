@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import {Link, NavLink} from 'react-router-dom'
 import NavigationBar from "./Navbar";
 function About(){
-    
+  const URL=process.env.REACT_APP_API_URL
     function showAbout(){
       return(
         <section className="text-center mx-auto">

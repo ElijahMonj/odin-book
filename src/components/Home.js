@@ -6,10 +6,9 @@ import NavigationBar from './Navbar'
 import { useNavigate } from 'react-router-dom';
 
 function Home(){
-    //window.localStorage.setItem("token", 0);
-    //const URL="https://odin-book-api-production-5397.up.railway.app/users";
+    
     const navigate = useNavigate();
-    const URL="http://localhost:4000/"
+    const URL=process.env.REACT_APP_API_URL
     const [user, setUser]=useState(0)
     useEffect(()=>{
         const fetchData = () => {
@@ -46,7 +45,7 @@ function Home(){
                   password: password,
                 },
                 withCredentials: true,
-                url: "http://localhost:4000/login",
+                url: URL+"login",
               }).then((res) => {
                   console.log(res)
                 if(res.data.message!==undefined){
@@ -141,7 +140,7 @@ function Home(){
                 axios({
                     method: "GET",
                     withCredentials: true,
-                    url: "http://localhost:4000/",
+                    url: URL,
                   }).then((res) => {
                     setUser(res.data);
                     console.log(res.data);

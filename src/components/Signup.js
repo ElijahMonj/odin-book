@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 function Signup(){
     const navigate = useNavigate();
-    const URL="http://localhost:3002/users/"
+    const URL=process.env.REACT_APP_API_URL
     async function submit(e){
         e.preventDefault();
         if(document.getElementById('password').value!==document.getElementById('confirmPassword').value){
@@ -25,7 +25,7 @@ function Signup(){
                             birthDay:document.getElementById('birthday').value,
                         },
                         withCredentials: true,
-                        url: "http://localhost:4000/register",
+                        url: URL+"register",
                       }).then((res) => {
                         if(res.status===201){
                             navigate(`/`);
