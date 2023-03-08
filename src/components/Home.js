@@ -236,7 +236,7 @@ function Home(){
                                     <div className="text-center">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                                         style={{width: 185}} alt="logo"/>
-                                    <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+                                    <h4 className="mt-1 mb-5 pb-1">Think & Share</h4>
                                     </div>
 
                                     <form onSubmit={loginUser} >
@@ -306,7 +306,7 @@ function Home(){
                                     <img className="" style={{minHeight:40, minWidth:40,height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
                                         src={user.currentUser.defaultProfile}>
                                         </img></a>
-                                    <h5 className="w-100 ms-2 m-0 d-flex flex-column justify-content-center">Whats in your mind, {user.currentUser.firstName}?</h5> 
+                                    <h5 className="w-100 ms-2 m-0 d-flex flex-column justify-content-center">Whats in your mind? Share it with us, {user.currentUser.firstName}!</h5> 
                                     </div>
                                     
                                     <textarea className="form-control my-3" id="textAreaExample" rows="2" style={{resize: "none"}} maxLength="200"></textarea>

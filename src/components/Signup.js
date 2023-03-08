@@ -6,40 +6,62 @@ import { useNavigate } from 'react-router-dom';
 function Signup(){
     const navigate = useNavigate();
     const URL=process.env.REACT_APP_API_URL
+
+
+    function onChangeBirthday(){
+        document.getElementById("labelBirthday").innerHTML="Birthday"
+        document.getElementById("labelBirthday").style.color="black"
+    }
+    function onChangePassword(){
+        document.getElementById("labelRegisterPassword").innerHTML="Confirm Password"
+        document.getElementById("labelRegisterPassword").style.color="black"
+    }
     async function submit(e){
         e.preventDefault();
-        if(document.getElementById('password').value!==document.getElementById('confirmPassword').value){
-            document.getElementById('warning').style.display="inline"
-        }else{
-            document.getElementById('warning').style.display="none"
+
+        
+        var Bdate = document.getElementById('birthday').value;
+        var Bday = +new Date(Bdate);
+        let age=(~~((Date.now() - Bday) / (31557600000)))
+        if(age>=16){
             
-            try {
+            if(document.getElementById('password').value!==document.getElementById('confirmPassword').value){
+               document.getElementById("labelRegisterPassword").innerHTML="Password does not match."
+               document.getElementById("labelRegisterPassword").style.color="red"
+            }else{
                 
-                    axios({
-                        method: "POST",
-                        data: {
-                            firstName:document.getElementById('firstName').value,
-                            lastName:document.getElementById('lastName').value,
-                            email:document.getElementById('email').value,
-                            password:document.getElementById('password').value,
-                            birthDay:document.getElementById('birthday').value,
-                        },
-                        withCredentials: true,
-                        url: URL+"register",
-                      }).then((res) => {
-                        if(res.status===201){
-                            navigate(`/`);
-                        }else{
-                            alert("User already exist")
-                        }   
-                      });
-                 
-                           
                 
-            } catch (error) {
-                console.log(error)
+                try {
+                    
+                        axios({
+                            method: "POST",
+                            data: {
+                                firstName:document.getElementById('firstName').value,
+                                lastName:document.getElementById('lastName').value,
+                                email:document.getElementById('email').value,
+                                password:document.getElementById('password').value,
+                                birthDay:document.getElementById('birthday').value,
+                            },
+                            withCredentials: true,
+                            url: URL+"register",
+                        }).then((res) => {
+                            if(res.status===201){
+                                navigate(`/`);
+                            }else{
+                                alert("User already exist")
+                            }   
+                        });
+    
+                } catch (error) {
+                    console.log(error)
+                }
             }
+        }else{
+            document.getElementById("labelBirthday").innerHTML="You must be at least 16 to register."
+            document.getElementById("labelBirthday").style.color="red"
         }
+
+        
        
         
           
@@ -79,24 +101,20 @@ function Signup(){
                                     </div>
 
                                     <div className="form-outline mb-4 form-floating">
-                                        <input type="password" required id="password" maxLength={30} className="form-control" name="password" placeholder="Password" />
+                                        <input type="password" required id="password" maxLength={30} minLength={8} className="form-control" name="password" placeholder="Password" />
                                         <label className="form-label" htmlFor="password" >Password</label>
                                     </div>
 
                                     <div className="form-outline mb-4 form-floating">
-                                        <input maxLength={30} required type="password" id="confirmPassword" className="form-control" name="confirmPassword" placeholder=" Confirm Password" />
-                                        <label className="form-label" htmlFor="confirmPassword">Confirm Password</label>
+                                        <input maxLength={30} required type="password" id="confirmPassword" className="form-control" onChange={onChangePassword} name="confirmPassword" placeholder=" Confirm Password" />
+                                        <label className="form-label" htmlFor="confirmPassword" id="labelRegisterPassword">Confirm Password</label>
 
-                                        <i className="text-danger" style={{display:'none'}} id="warning">
-                                            Inline text <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mb-1 bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
-                                        </svg>
-                                        </i>
+                                      
                                     </div>
 
                                     <div className="form-outline mb-4 form-floating">
-                                        <input type="date" required id="birthday" className="form-control" name="birthday" placeholder="Birthday" />
-                                        <label className="form-label" htmlFor="birthday">Birthday</label>
+                                        <input type="date" required id="birthday" className="form-control" name="birthday" onChange={onChangeBirthday} placeholder="Birthday" />
+                                        <label className="form-label" htmlFor="birthday" id="labelBirthday">Birthday</label>
                                     </div>
                                     <div className="text-center pt-1 pb-1 d-grid">
                                         <button className="btn btn-block fa-lg gradient-custom-2 mb-3" id="postButton" type="submit">Sign-up</button>

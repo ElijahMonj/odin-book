@@ -120,7 +120,7 @@ nav{
 .notifIcon > .dropdown-menu {
 
   overflow-y: scroll;
-  
-  height: 500px;
+  min-height: 100px;
+  max-height: 500px;
   
   }
