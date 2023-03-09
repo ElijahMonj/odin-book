@@ -10,7 +10,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-
+import logoDark from "./images/TS_Dark.png"
+import logoLong from "./images/TS_long.png"
 import { useNavigate } from 'react-router-dom';
 
 function NavigationBar() {
@@ -116,9 +117,10 @@ function NavigationBar() {
                     <Navbar key={expand} bg="" expand={expand} className="">
 
                       <Container fluid>
-                        <Navbar.Brand ><Link to="/"><img
-                                    src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                                    height="20"
+                        <Navbar.Brand ><Link to="/" ><img
+                                    src={logoLong}
+                                    height="30"
+                                    
                                     alt="MDB Logo"
                                     loading="lazy"
                                 /></Link></Navbar.Brand>

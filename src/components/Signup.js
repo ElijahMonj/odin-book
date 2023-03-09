@@ -3,6 +3,8 @@ import { useState,useEffect } from "react";
 import {Link, NavLink} from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import logoDark from "./images/TS_Dark.png"
+import logoLight from "./images/TS_light.png"
 function Signup(){
     const navigate = useNavigate();
     const URL=process.env.REACT_APP_API_URL
@@ -76,7 +78,7 @@ function Signup(){
                         <div className="col-xl-10">
                             <div className="card rounded-3 text-black">
                             <div className="row g-0">
-                                <div className="col-lg-6">
+                                <div className="col-lg-6" style={{backgroundColor:"#F1F6F9"}}>
                                 <div className="card-body p-md-5 mx-md-4">
 
                                     
@@ -133,11 +135,10 @@ function Signup(){
                                 
                                 <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                 <div className="text-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                                    <img src={logoDark}
                                         style={{width: 185}} alt="logo"/>
-                                    <h4 className="mt-1 mb-5 pb-1 text-center">We are The Lotus Team</h4>
                                     </div>
-                                    <h4 className="mb-4">We are more than just a company</h4>
+                                    <h4 className="mb-4">Think & Share</h4>
                                     <p className="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                                     exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>

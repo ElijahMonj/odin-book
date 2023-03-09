@@ -47,6 +47,15 @@ nav{
   
 }
 
+#newPostButton,.newPostButton{
+  background-color: #14274E;
+  color:#f5f5f5;
+}
+#newPostButton:hover{
+  background-color: #394867;
+  
+}
+
 #button-addon2{
   background-color: #14274E;
 }
