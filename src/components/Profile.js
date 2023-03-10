@@ -178,7 +178,7 @@ function Profile(){
                                                 <div className="col text-start d-flex justify-content-center flex-column">
                                                 <div className="card-body p-0 d-flex justify-content-center flex-column" >
                                                     <h6 className="card-text text-break m-0 d-flex justify-content-start">{findName()}</h6>
-                                                    <p className="card-text text-break"><small className="text-muted d-flex justify-content-start">@{findEmail()}</small></p>
+                                                    <p className="card-text text-break"><small className="text-muted d-flex justify-content-start">{findEmail()}</small></p>
                                                 </div>
                                                 </div>
                                             </div>
@@ -229,7 +229,7 @@ function Profile(){
                                                 <div className="col text-start d-flex justify-content-center flex-column">
                                                 <div className="card-body p-0 d-flex justify-content-center flex-column" >
                                                     <h6 className="card-text text-break m-0 d-flex justify-content-start">{findName()}</h6>
-                                                    <p className="card-text text-break"><small className="text-muted d-flex justify-content-start">@{findEmail()}</small></p>
+                                                    <p className="card-text text-break"><small className="text-muted d-flex justify-content-start">{findEmail()}</small></p>
                                                 </div>
                                                 </div>
                                             </div>
@@ -400,7 +400,7 @@ function Profile(){
 
                                                 } else {
                                                     return (
-                                                        <img src={p.picture} />
+                                                        <img className="border-top border-bottom" src={p.picture} />
                                                     )
                                                 }
 
@@ -527,7 +527,8 @@ function Profile(){
                                                                                 src={user.currentUser.defaultProfile}></img>
                                                                             <form className="input-group ms-2" onSubmit={newComment}>
                                                                                 <div className="input-group mb-3">
-                                                                                    <input type="text" className="form-control" placeholder="Write a public comment..."
+                                                                                    <input type="text" className="form-control" minLength={2}
+                                                                                    placeholder="Write a public comment..."
                                                                                         aria-label="Write a public comment..." aria-describedby="button-addon2" id={"writeComment"+p.id} />
                                                                                     <button className="btn btn-outline-secondary" type="submit" id="button-addon2">
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className="bi bi-arrow-return-left" viewBox="0 0 16 16">

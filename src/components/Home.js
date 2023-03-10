@@ -86,7 +86,7 @@ function Home(){
     function checkPost(){
         if(getPosts().length==0){
             return(
-                <h1 className="display-1 text-center">No posts yet.</h1>
+                <h1 className="display-5 text-center text-muted">No posts yet.</h1>
             )
         }
     }
@@ -157,8 +157,8 @@ function Home(){
         console.log("Fetching data...")
         fetchData();
     }
-    async function newPost(){
-       
+    async function newPost(e){
+       e.preventDefault()
         
         
         const d = new Date();
@@ -222,11 +222,11 @@ function Home(){
         
     }
     function checkTextArea(){
-        if(document.getElementById('textAreaExample').value.length!==0){
-            document.getElementById("newPostButton").disabled = false;
-        }else{
-            document.getElementById("newPostButton").disabled = true;
-        }
+       // if(document.getElementById('textAreaExample').value.length!==0){
+        //    document.getElementById("newPostButton").disabled = false;
+        //}else{
+       //     document.getElementById("newPostButton").disabled = true;
+       // }
     }
     function homepage(){
         if(user===1||user.username==="Please Login"){
@@ -315,10 +315,12 @@ function Home(){
                                     <img className="" style={{minHeight:40, minWidth:40,height:40, width:40, objectFit:"cover",borderRadius: 150 / 2,overflow:"hidden"}} 
                                         src={user.currentUser.defaultProfile}>
                                         </img></a>
-                                    <h5 className="w-100 ms-2 m-0 d-flex flex-column justify-content-center">Whats in your mind? Share it with us, {user.currentUser.firstName}!</h5> 
+                                    <h5 className="w-100 ms-2 m-0 d-flex flex-column justify-content-center">What's in your thoughts? Share it with us, {user.currentUser.firstName}!</h5> 
                                     </div>
+                                    <form id="newpost" onSubmit={newPost}>
+                                    <textarea className="form-control my-3" onChange={checkTextArea} id="textAreaExample" rows="2" style={{resize: "none"}} minLength={3} maxLength={200}></textarea>
+                                    </form>
                                     
-                                    <textarea className="form-control my-3" onChange={checkTextArea} id="textAreaExample" rows="2" style={{resize: "none"}} maxLength="200"></textarea>
                                     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="modal-dialog">
                                             <div className="modal-content">
@@ -347,7 +349,7 @@ function Home(){
                                         </svg>
                                         </button>
                                         
-                                        <button type="button" className="btn" id="newPostButton" onClick={newPost} disabled>
+                                        <button type="submit" className="btn" id="newPostButton" form="newpost" >
                                             Post 
                                         </button>
                                         
@@ -416,7 +418,7 @@ function Home(){
                                 
                             }else{
                                 return(
-                                <img src={p.picture}/>
+                                <img className="border-top border-bottom" src={p.picture}/>
                                 )
                             }
                             
@@ -547,7 +549,7 @@ function Home(){
                                             src={user.currentUser.defaultProfile}></img>
                                             <form className="input-group ms-2" onSubmit={newComment}>
                                             <div className="input-group mb-3">
-                                            <input type="text" className="form-control" placeholder="Write a public comment..."
+                                            <input type="text" className="form-control" placeholder="Write a public comment..." minLength={2}
                                              aria-label="Write a public comment..." aria-describedby="button-addon2" id={'writeComment'+p.id} maxLength="200"/>
                                             <button className="btn " type="submit" id="button-addon2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className="bi bi-arrow-return-left" viewBox="0 0 16 16">
