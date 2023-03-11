@@ -133,3 +133,27 @@ nav{
   max-height: 500px;
   
   }
+
+.madeWith{
+  padding-top: 15%;
+  padding-left: 25%;
+  padding-right: 25%;
+  padding-bottom: 5%;
+  transition: transform .2s; 
+  opacity: 0.9;
+  object-fit: cover;
+  
+}
+.madeWith:hover{
+  opacity: 1;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.madeWithLinks a{
+  text-decoration: none;
+  color: #394867;
+}
+.madeWithLinks a:hover{
+  
+  color: #14274E;
+}
