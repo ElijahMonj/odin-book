@@ -4,7 +4,7 @@ import {Link, NavLink} from 'react-router-dom'
 import axios from 'axios';
 import NavigationBar from './Navbar'
 function Chat(){
-    const URL=process.env.REACT_APP_API_URL
+    const URL="http://localhost:4000/"
     const [user, setUser]=useState(0)
     useEffect(()=>{
         const fetchData = () => {

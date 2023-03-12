@@ -6,7 +6,7 @@ import NavigationBar from './Navbar'
 
 import { useNavigate } from 'react-router-dom';
 function Profile(){
-    const URL=process.env.REACT_APP_API_URL
+    const URL="http://localhost:4000/"
     const [searchParams,setSearchParams]=useSearchParams()
     const showUser=searchParams.get('user')
     

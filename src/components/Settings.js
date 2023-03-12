@@ -7,7 +7,7 @@ import NavigationBar from './Navbar'
 
 function Settings(){
     const navigate = useNavigate();
-    const URL=process.env.REACT_APP_API_URL
+    const URL="http://localhost:4000/"
     const [user, setUser]=useState(0)
     useEffect(()=>{
         const fetchData = () => {

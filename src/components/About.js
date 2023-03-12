@@ -5,7 +5,7 @@ import NavigationBar from "./Navbar";
 import aboutLogo from "./images/about.png"
 import missionLogo from "./images/mission.png"
 import visionLogo from "./images/vision.png"
-
+import logoLight from "./images/TS_light.png"
 import BootstrapLogo from "./images/bootstrap.png"
 import ExpressLogo from "./images/express.png"
 import ReactLogo from "./images/react.png"
@@ -13,13 +13,13 @@ import MongoDBLogo from "./images/mongodb.png"
 import PassportLogo from "./images/passport.png"
 import NodeLogo from "./images/node.png"
 function About(){
-  const URL=process.env.REACT_APP_API_URL
+  const URL="http://localhost:4000/"
     function showAbout(){
       return(
         <section className="text-center mx-auto pt-4">
-            <h1>Think & Share (h1)</h1>
+            <h1>THINK & SHARE</h1>
 
-            <h4>Think about something... and share it with us!(h4)</h4>
+            <h4>Think about something... and share it!</h4>
 
             <hr className="my-4"/>
 
@@ -32,15 +32,11 @@ function About(){
               
 
               <div className="row d-flex justify-content-center m-0">
-                  <div className="col-lg-4 col-md-12">
+                  <div className="col-lg-4 col-md-12 ">
                     <h5>About</h5>
 
-                    <p className="small text-muted text-uppercase mb-0">Component subheading</p>
-                    <p className="small text-muted mb-2">
-                      
-                    </p>
 
-                    <h6>Component alternative subheading (h6)</h6>
+                    <h6>About Us</h6>
 
                     <p>
                       Lorem, ipsum dolor sit amet consectetur adipisicing elit. A nemo commodi odio veniam
@@ -53,7 +49,7 @@ function About(){
                     
                   <img src={aboutLogo}
                     alt="" className="img-fluid m-auto"
-                    style={{objectFit:"cover", height:190,zIndex: 1}}/>
+                    style={{objectFit:"cover", height:160,zIndex: 1}}/>
 
                   </div>
               </div>
@@ -65,12 +61,9 @@ function About(){
                   <div className="col-lg-4 col-md-12">
                     <h5>Vision</h5>
 
-                    <p className="small text-muted text-uppercase mb-0">Component subheading</p>
-                    <p className="small text-muted mb-2">
-                      
-                    </p>
+                    
 
-                    <h6>Component alternative subheading (h6)</h6>
+                    <h6>Our Vision</h6>
 
                     <p>
                       Lorem, ipsum dolor sit amet consectetur adipisicing elit. A nemo commodi odio veniam
@@ -79,10 +72,10 @@ function About(){
                     </p>
 
                   </div>
-                  <div className="col-lg-4 col-md-12 mb-4 d-flex justify-content-center">
+                  <div className="col-lg-4 col-md-12 d-flex mb-4 justify-content-center">
                   <img src={visionLogo}
                     alt="" className="img-fluid m-auto"
-                    style={{objectFit:"cover", height:190,zIndex: 1}}/>
+                    style={{objectFit:"cover", height:160,zIndex: 1}}/>
                 </div>
 
               </div>
@@ -91,12 +84,9 @@ function About(){
                   <div className="col-lg-4 col-md-12">
                     <h5>Mission</h5>
 
-                    <p className="small text-muted text-uppercase mb-0">Component subheading</p>
-                    <p className="small text-muted mb-2">
-                      
-                    </p>
+                   
 
-                    <h6>Component alternative subheading (h6)</h6>
+                    <h6>Our Mission</h6>
 
                     <p>
                       Lorem, ipsum dolor sit amet consectetur adipisicing elit. A nemo commodi odio veniam
@@ -108,7 +98,7 @@ function About(){
                   <div className="col-lg-4 col-md-12 mb-4 d-flex justify-content-center">
                   <img src={missionLogo}
                     alt="" className="img-fluid m-auto"
-                    style={{objectFit:"cover", height:190,zIndex: 1}}/>
+                    style={{objectFit:"cover", height:160,zIndex: 1}}/>
 
                   </div>
               </div>
