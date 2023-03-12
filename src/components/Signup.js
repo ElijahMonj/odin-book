@@ -44,7 +44,7 @@ function Signup(){
                                 password:document.getElementById('password').value,
                                 birthDay:document.getElementById('birthday').value,
                             },
-                            withCredentials: true,
+                            
                             url: URL+"register",
                         }).then((res) => {
                             if(res.status===201){

@@ -14,7 +14,7 @@ function Myprofile() {
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                   
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);
@@ -36,7 +36,7 @@ function Myprofile() {
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                    
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);
@@ -61,7 +61,7 @@ function Myprofile() {
                 data: {
                     bio: document.getElementById('newBio').value
                 },
-                withCredentials: true,
+               
                 url: URL + user.currentUser._id + "/bio",
               }).then((res) => refresh());
 
@@ -330,7 +330,7 @@ function Myprofile() {
                                                             date: postDate,
                                                             content: document.getElementById('writeComment'+p.id).value
                                                         },
-                                                        withCredentials: true,
+                                                       
                                                         url: URL + p.author + "/posts/" + p.id + "/newComment",
                                                     }).then((res) => refresh());
                                                     document.getElementById('writeComment'+p.id).value = ""

@@ -401,7 +401,7 @@ function Home(){
                                         date:postDate,
                                         content:document.getElementById('writeComment'+p.id).value    
                                     },
-                                    withCredentials: true,
+                                   
                                     url:URL+p.author+"/posts/"+p.id+"/newComment",
                                 }).then((res) => refresh()); 
                                 document.getElementById('writeComment'+p.id).value=""

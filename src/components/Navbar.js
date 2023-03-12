@@ -24,7 +24,7 @@ function NavigationBar() {
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                   
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);
@@ -46,7 +46,7 @@ function NavigationBar() {
           try {
               axios({
                   method: "GET",
-                  withCredentials: true,
+                 
                   url: URL,
                 }).then((res) => {
                   setUser(res.data);
@@ -70,7 +70,7 @@ function NavigationBar() {
         try {
             axios({
                 method: "POST",
-                withCredentials: true,
+                
                 url: URL+"logout",
               }).then((res) => {
                 console.log(res)

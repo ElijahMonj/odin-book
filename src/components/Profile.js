@@ -17,7 +17,7 @@ function Profile(){
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                    
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);
@@ -42,7 +42,7 @@ function Profile(){
                 data:{
                     tofollow:showUser
                 },
-                withCredentials: true,
+                
                 url: URL+"addfollowing/"+user.currentUser._id+"/"+showUser+"/",
               }).then((res) => refresh());
 
@@ -56,7 +56,7 @@ function Profile(){
                 data:{
                     followby:user.currentUser._id
                 },
-                withCredentials: true,
+                
                 url:URL+"addfollowers/"+showUser+"/"+user.currentUser._id+"/",
               }).then((res) => refresh());
 
@@ -72,7 +72,7 @@ function Profile(){
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                    
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);
@@ -98,7 +98,7 @@ function Profile(){
                 data:{
                     toremove:showUser
                 },
-                withCredentials: true,
+                
                 url:URL+"removefollowing/"+user.currentUser._id+"/"+showUser+"/",
               }).then((res) => refresh());
 
@@ -112,7 +112,7 @@ function Profile(){
                 data:{
                     removeby:user.currentUser._id
                 },
-                withCredentials: true,
+                
                 url:URL+"removefollowers/"+showUser+"/"+user.currentUser._id+"/",
               }).then((res) => refresh());
          
@@ -383,7 +383,7 @@ function Profile(){
                                                             date: postDate,
                                                             content: document.getElementById('writeComment'+p.id).value
                                                         },
-                                                        withCredentials: true,
+                                                        
                                                         url: URL + p.author + "/posts/" + p.id + "/newComment",
                                                     }).then((res) => refresh());
                                                     document.getElementById('writeComment'+p.id).value = ""

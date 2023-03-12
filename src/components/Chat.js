@@ -11,7 +11,7 @@ function Chat(){
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                   
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);

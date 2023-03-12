@@ -14,7 +14,7 @@ function Settings(){
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                    
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);
@@ -34,7 +34,7 @@ function Settings(){
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                    
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);
@@ -85,7 +85,7 @@ function Settings(){
                     lastName:document.getElementById('lastName').value,
                     password:document.getElementById('changeNamePassword').value
                 },
-                withCredentials: true,
+                
                 url:URL+user.currentUser._id+"/changeName/",
               }).then((res) => {
                   console.log(res)
@@ -127,7 +127,7 @@ function Settings(){
                     email:document.getElementById('email').value,
                     password:document.getElementById('changeEmailPassword').value
                 },
-                withCredentials: true,
+                
                 url:URL+user.currentUser._id+"/changeEmail/",
               }).then((res) => {
                   console.log(res)
@@ -178,7 +178,7 @@ function Settings(){
                     newPassword:document.getElementById('password').value,
                     password:document.getElementById('confirmChangePasswordPassword').value
                 },
-                withCredentials: true,
+                
                 url:URL+user.currentUser._id+"/changePassword/",
               }).then((res) => {
                   console.log(res)
