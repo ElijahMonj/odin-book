@@ -17,7 +17,7 @@ function Home(){
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                    
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);
@@ -46,7 +46,7 @@ function Home(){
                   username: email,
                   password: password,
                 },
-                withCredentials: true,
+               
                 url: URL+"login",
               }).then((res) => {
                   console.log(res)
@@ -141,7 +141,7 @@ function Home(){
             try {
                 axios({
                     method: "GET",
-                    withCredentials: true,
+                    
                     url: URL,
                   }).then((res) => {
                     setUser(res.data);
@@ -180,8 +180,8 @@ function Home(){
                     comments:[],
                     likes:[],
                     picture:document.getElementById('imageLink').innerHTML    
-                },
-                withCredentials: true,
+                }, 
+                
                 url:URL+user.currentUser._id+"/newPost/",
               }).then((res) => refresh());
             const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
