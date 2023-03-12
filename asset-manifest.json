@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/odin-book/static/css/main.b30d5aeb.css",
+    "main.js": "/odin-book/static/js/main.0851f7a8.js",
+    "static/media/bootstrap.png": "/odin-book/static/media/bootstrap.52d34c336260d790963a.png",
+    "static/media/mission.png": "/odin-book/static/media/mission.808caa3a50ff0396d4c6.png",
+    "static/media/TS_Dark.png": "/odin-book/static/media/TS_Dark.9dd17c94f8d158db447e.png",
+    "static/media/TS_light.png": "/odin-book/static/media/TS_light.cd5826beeb68d0dc8287.png",
+    "static/media/node.png": "/odin-book/static/media/node.e328955d6bbbf3ebc72b.png",
+    "static/media/TS_long.png": "/odin-book/static/media/TS_long.e7cbfcddf36422fd0e19.png",
+    "static/media/react.png": "/odin-book/static/media/react.f3e576ba08e6be927148.png",
+    "static/media/vision.png": "/odin-book/static/media/vision.a26c33ee077926a7dfc6.png",
+    "static/media/about.png": "/odin-book/static/media/about.068b1aa3206779301687.png",
+    "static/media/mongodb.png": "/odin-book/static/media/mongodb.1c1fc3b1b8057cae02fd.png",
+    "static/media/express.png": "/odin-book/static/media/express.e3d4f9e5c8b469e45838.png",
+    "index.html": "/odin-book/index.html",
+    "main.b30d5aeb.css.map": "/odin-book/static/css/main.b30d5aeb.css.map",
+    "main.0851f7a8.js.map": "/odin-book/static/js/main.0851f7a8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b30d5aeb.css",
+    "static/js/main.0851f7a8.js"
+  ]
+}
