@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import {Link, NavLink} from 'react-router-dom'
 function Post(){
     
-    const URL="http://localhost:4000/"
+    const URL=process.env.REACT_APP_API_URL
 
     return(
         <div>

@@ -6,7 +6,7 @@ import NavigationBar from './Navbar'
 
 import { useNavigate } from 'react-router-dom';
 function Myprofile() {
-    const URL="http://localhost:4000/"
+    const URL=process.env.REACT_APP_API_URL
     const [user, setUser] = useState(0)
     const navigate = useNavigate();
     useEffect(()=>{

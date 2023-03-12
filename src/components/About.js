@@ -13,7 +13,7 @@ import MongoDBLogo from "./images/mongodb.png"
 import PassportLogo from "./images/passport.png"
 import NodeLogo from "./images/node.png"
 function About(){
-  const URL="http://localhost:4000/"
+  const URL=process.env.REACT_APP_API_URL
     function showAbout(){
       return(
         <section className="text-center mx-auto pt-4">

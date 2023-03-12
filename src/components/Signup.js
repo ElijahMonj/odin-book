@@ -7,7 +7,7 @@ import logoDark from "./images/TS_Dark.png"
 import logoLight from "./images/TS_light.png"
 function Signup(){
     const navigate = useNavigate();
-    const URL="http://localhost:4000/"
+    const URL=process.env.REACT_APP_API_URL
 
 
     function onChangeBirthday(){
