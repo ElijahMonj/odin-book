@@ -1,6 +1,6 @@
 {
   "homepage": "https://ElijahMonj.github.io/odin-book",
-  "name": "my-app",
+  "name": "odin-book",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
